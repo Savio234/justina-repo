@@ -1,0 +1,97 @@
+$white: white;
+$d-flex: flex;
+$d-block: block;
+$margin: 0;
+$list-style: none;
+$gap1: 60px;
+$gap2: 30px;
+$nav-gap: 5rem;
+$padding-body: 0;
+$navposition: fixed;
+$top: 0;
+$space-between: space-between;
+$justify-center: center;
+$justify-flex-end: flex-end;
+$text-center: center;
+$object-fit: cover;
+$background-repeat: no-repeat;
+$width: 100%;
+$width2: 100vw;
+$width3: 40%;
+$width4: 0%;
+$width5: 25%;
+$height2: 100vh;
+$m-left: 100px;
+$m-right: 100px;
+$m-top: 50px;
+$p-top: 80px;
+$p-bottom: 80px;
+$text-center: center;
+$herobg: url('/src/assets/heroimage.png');
+$f-direction: column;   
+$f-wrap: wrap;
+
+body{
+    background: $white;
+    margin: $margin;
+    padding: $padding-body;
+}
+nav{
+    position: $navposition;
+    top: $top;
+    background: $white;
+    width: $width2;
+    display: $d-flex;
+    justify-content: $justify-center;
+    gap: $nav-gap;
+    
+}
+ul{
+    display: $d-flex;
+    justify-content: $space-between;
+    gap: $gap1;
+}
+nav ul li{
+    list-style: $list-style;
+ 
+}
+// .heroimage{
+//     object-fit: $object-fit;
+//     width: $width;
+// }
+.hero{
+   text-align: $text-center;
+   margin-top: $m-top;
+   padding-top: $p-top;
+   padding-bottom: $p-bottom;
+}
+.herobg{
+    background-image: $herobg;
+    width: $width2;
+    height: $height2;
+background-repeat: $background-repeat;
+}
+.navlinks{
+    display: $d-flex;
+    justify-content: $justify-flex-end;
+}
+.icons{
+    width: $width4;
+}
+.heroTexts{
+    display: $d-flex;
+    gap: $gap2;
+    justify-content: $justify-center;
+
+}
+.products{
+    display: $d-flex;
+    // flex-direction: $f-direction;
+    flex-wrap: $f-wrap;
+    list-style: $list-style;
+    justify-content: $justify-center;
+}
+
+#product-image{
+    width: $width5;
+}
