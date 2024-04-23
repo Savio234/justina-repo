@@ -9,7 +9,10 @@ const Navbar: React.FC = () => {
     <div id="navigation-bar">
         <nav>
             <ul>
-                <li><a href="#" id="home">Home</a></li>
+                <li>
+                  {/* eslint-disable*/}
+                  <a href="#" id="home">Home</a>
+                </li>
                 <li><a href="#" id="shop">Shop</a></li>
                 <li><a href="#" id="about">About</a></li>
                 <li><a href="#" id="contact">Contact</a></li>
