@@ -1,6 +1,8 @@
 import React from 'react';
 import Navbar from './components/Navbar';
+import SortItems from './components/Sort'
 import Hero from './components/Hero';
+import Footer from './components/Footer'
 import './scss/main.scss';
 import './scss/color/color.scss';
 import './scss/typography/fonts.scss';
@@ -8,7 +10,7 @@ import { Outlet } from 'react-router-dom';
 //import Products from './components/products';
 // import { sampleProducts } from "./data";
 
-
+import Guarantee from './components/Guarant';
 
 
 const App: React.FC = () => {
@@ -16,18 +18,11 @@ const App: React.FC = () => {
     <>
       <Navbar />
       <Hero />
+      <SortItems />
       <Outlet />
-      {/* <main>
-        <ul>
-          {sampleProducts.map((product) => (
-            <li>
-              <img src={product.image} alt={product.name} />
-              <h2>{product.name}</h2>
-              <h3>{product.price}</h3>
-            </li>
-          ))}
-        </ul>
-      </main> */}
+      <Guarantee />
+   <Footer />
+  
     </>
   );
 }

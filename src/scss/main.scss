@@ -1,36 +1,50 @@
 $white: white;
 $d-flex: flex;
 $d-block: block;
+$flex-column: column;
+$d-none: none;
 $margin: 0;
+$margin2: 50px;
 $list-style: none;
 $gap1: 60px;
-$gap2: 30px;
+$gap2: 20px;
+$gap3:100px;
 $nav-gap: 5rem;
 $padding-body: 0;
+$p-body: 30px;
+$p-20: 8px;
+$p-40: 40px;
+$w-20: 50px;
 $navposition: fixed;
 $top: 0;
 $space-between: space-between;
 $justify-center: center;
 $justify-flex-end: flex-end;
 $text-center: center;
+$align-center: center;
 $object-fit: cover;
-$background-repeat: no-repeat;
+$background-repeat: inherit;
 $width: 100%;
 $width2: 100vw;
 $width3: 40%;
 $width4: 0%;
 $width5: 25%;
-$height2: 100vh;
+$height2: 65vh;
+$height: 30vh;
 $m-left: 100px;
 $m-right: 100px;
 $m-top: 50px;
+$m-top2: 50px;
+$m-bottom: 50px;
 $p-top: 80px;
 $p-bottom: 80px;
 $text-center: center;
 $herobg: url('/src/assets/heroimage.png');
 $f-direction: column;   
 $f-wrap: wrap;
-
+$background-color2: #FAF4F4;
+$background-color: #FFF9E5;
+$background-hover: #FBEBB5;
 body{
     background: $white;
     margin: $margin;
@@ -84,14 +98,83 @@ background-repeat: $background-repeat;
     justify-content: $justify-center;
 
 }
-.products{
+#products{
     display: $d-flex;
     // flex-direction: $f-direction;
     flex-wrap: $f-wrap;
     list-style: $list-style;
     justify-content: $justify-center;
+    width: 100%;
 }
+#products2{
+    display: $d-flex;
+    // flex-direction: $f-direction;
+    flex-wrap: $f-wrap;
+    list-style: $list-style;
+    justify-content: $justify-center;
+    width: 100%;
 
-#product-image{
+}
+#products3{
+    display: $d-flex;
+    // flex-direction: $f-direction;
+    flex-wrap: $f-wrap;
+    list-style: $list-style;
+    justify-content: $justify-center;
+    width: 100%;
+ 
+}
+.productDiv{
     width: $width5;
 }
+.numbers{
+    display: $d-flex;
+    gap: $gap2;
+    align-items: $align-center;
+    justify-content: $justify-center;
+    text-align: $text-center;
+    margin-top: $m-top2;
+    margin-bottom: $m-bottom;
+
+  
+}
+.numberDesign{
+    background-color: $background-color;
+    padding: $p-20;
+    width: $w-20;
+    border: $background-color;
+
+}
+.numberDesign:hover{
+    background-color: $background-hover;
+
+}
+.guarantee{
+    display: $d-flex;
+    gap: $gap1;
+    justify-content: $justify-center;
+    align-items: $align-center;
+    height: $height;
+    background-color: $background-color2;
+
+}
+.guarant{
+    margin: $margin2;
+}
+.footerLinks{
+    display: $d-flex;
+    gap: $gap3;
+    align-items: $align-center;
+    padding: $p-40;
+}
+.footerLinksBlock{
+    display: $d-flex;
+    flex-direction: $flex-column;
+    
+}
+.footerParagraph{
+    padding: $p-40;
+}
+// #product-image{
+//     width: $width5;
+// }
