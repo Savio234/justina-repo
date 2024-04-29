@@ -25,12 +25,7 @@ const Footer: React.FC = () => {
           <div className="footerLinksBlock">
             <p>Newsletter</p>
             <div>
-              <input
-                type="text"
-                name=""
-                placeholder="Enter your Email Address"
-                id=""
-              />
+              
               <a href="">Subscribe</a>
             </div>
           </div>
