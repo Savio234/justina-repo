@@ -9,6 +9,7 @@ $list-style: none;
 $gap1: 60px;
 $gap2: 20px;
 $gap3:100px;
+$gap4:140px;
 $nav-gap: 5rem;
 $padding-body: 0;
 $p-body: 30px;
@@ -172,8 +173,7 @@ background-repeat: $background-repeat;
 }
 .footerLinks{
     display: $d-flex;
-    gap: $gap3;
-    align-items: $align-center;
+    gap: $gap4;
     padding: $p-40;
     color: $b-ash2;
     line-height: $l-height;
@@ -184,6 +184,7 @@ background-repeat: $background-repeat;
     display: $d-flex;
     flex-direction: $flex-column;
     color: $b-ash2;
+    margin-top: $m-top2;
 
     
 }
@@ -192,6 +193,7 @@ background-repeat: $background-repeat;
 // }
 .footerParagraph{
     padding: $p-40;
+   
 }
 // #product-image{
 //     width: $width5;
