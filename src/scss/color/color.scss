@@ -15,6 +15,9 @@ h4,
 .footerLinksBlock a{
     color: $li;
 }
+.heroTexts a:hover{
+    color: $li;
+}
 
 .sizesBtn {
     background-color: $background-color2;
@@ -37,4 +40,7 @@ h4,
 #asgardSofa,
 .outdoorSofa {
     background-color: $b-yellow;
+}
+.footerLinksBlock a:hover {
+    color: $li;
 }

@@ -48,6 +48,7 @@ $background-color: #FFF9E5;
 $background-hover: #FBEBB5;
 $b-ash2: #9F9F9F;
 $underline: underline;
+$l-height: 30px;
 body{
     background: $white;
     margin: $margin;
@@ -173,8 +174,10 @@ background-repeat: $background-repeat;
     align-items: $align-center;
     padding: $p-40;
     color: $b-ash2;
+    line-height: $l-height;
   
 }
+
 .footerLinksBlock{
     display: $d-flex;
     flex-direction: $flex-column;
