@@ -34,8 +34,8 @@ nav ul li {
 .herobg {
   background-image: url("/src/assets/heroimage.png");
   width: 100vw;
-  height: 100vh;
-  background-repeat: no-repeat;
+  height: 65vh;
+  background-repeat: inherit;
 }
 
 .navlinks {
@@ -49,6 +49,90 @@ nav ul li {
 
 .heroTexts {
   display: flex;
-  gap: 30px;
+  gap: 20px;
   justify-content: center;
+}
+
+#products {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: center;
+  width: 100%;
+}
+
+#products2 {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: center;
+  width: 100%;
+}
+
+#products3 {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: center;
+  width: 100%;
+}
+
+.productDiv {
+  width: 25%;
+}
+
+.numbers {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.numberDesign {
+  background-color: #FFF9E5;
+  padding: 8px;
+  width: 50px;
+  border: #FFF9E5;
+}
+
+.numberDesign:hover {
+  background-color: #FBEBB5;
+}
+
+.guarantee {
+  display: flex;
+  gap: 60px;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  background-color: #FAF4F4;
+}
+
+.guarant {
+  margin: 50px;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 100px;
+  align-items: center;
+  padding: 40px;
+  color: #9F9F9F;
+}
+
+.footerLinksBlock {
+  display: flex;
+  flex-direction: column;
+  color: #9F9F9F;
+}
+
+.footerParagraph {
+  padding: 40px;
+}
+
+.navIcons {
+  width: 15px;
 }/*# sourceMappingURL=main.css.map */

@@ -10,28 +10,44 @@ const Footer: React.FC = () => {
             <p>R, 33134 USA</p>
           </div>
           <div className="footerLinksBlock">
-            <p>Links</p>
-            <a href="">Home</a>
-            <a href="">Shop</a>
-            <a href="">About</a>
-            <a href="">Contact</a>
+            <p className="footerLinkCol">Links</p>
+            <a href="" className="footerLinkCol">
+              Home
+            </a>
+            <a href="" className="footerLinkCol">
+              Shop
+            </a>
+            <a href="" className="footerLinkCol">
+              About
+            </a>
+            <a href="" className="footerLinkCol">
+              Contact
+            </a>
           </div>
           <div className="footerLinksBlock">
             <p>Help</p>
-            <a href="">Payment Options</a>
-            <a href="">Returns</a>
-            <a href="">Privacy Policies</a>
+            <a href="" className="footerLinkCol">
+              Payment Options
+            </a>
+            <a href="" className="footerLinkCol">
+              Returns
+            </a>
+            <a href="" className="footerLinkCol">
+              Privacy Policies
+            </a>
           </div>
           <div className="footerLinksBlock">
             <p>Newsletter</p>
-            <div>
-              
+            <div className="emailLinkFlex">
+              <input type="email" name="" id="emailLink" />
               <a href="">Subscribe</a>
             </div>
           </div>
         </div>
 
-        <p className="footerParagraph">2022 Meubel House. All rights reserved</p>
+        <p className="footerParagraph">
+          2022 Meubel House. All rights reserved
+        </p>
       </>
     );
 }
