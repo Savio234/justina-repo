@@ -39,8 +39,8 @@ const Footer: React.FC = () => {
           <div className="footerLinksBlock">
             <p>Newsletter</p>
             <div className="emailLinkFlex">
-              <input type="email" name="" id="emailLink" />
-              <a href="">Subscribe</a>
+              <input type="email" name="" placeholder="Enter your email" id="emailLink"  />
+              <a href="" id="emailBtn">Subscribe</a>
             </div>
           </div>
         </div>

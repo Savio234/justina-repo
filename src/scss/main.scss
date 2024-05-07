@@ -49,6 +49,8 @@ $background-hover: #FBEBB5;
 $b-ash2: #9F9F9F;
 $underline: underline;
 $l-height: 30px;
+$b-none: none;
+$b-bottom: solid 3px black;
 body{
     background: $white;
     margin: $margin;
@@ -202,5 +204,13 @@ background-repeat: $background-repeat;
     gap: $gap2;
 }
 #emailLink{
-    text-decoration: $underline;
+    border: $b-none;
+    border-bottom: $b-bottom;
+  
+}
+#emailLink:focus{
+    outline: $b-none;
+}
+#emailBtn{
+    border-bottom: $b-bottom;
 }
