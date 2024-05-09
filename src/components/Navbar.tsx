@@ -3,7 +3,8 @@ import Vector1 from "../assets/Vector1.png";
 import Vector2 from "../assets/Vector2.png";
 import Vector3 from "../assets/Vector3.png";
 import Vector4 from "../assets/Vector4.png";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   return (
@@ -13,44 +14,44 @@ const Navbar: React.FC = () => {
           <nav>
             <ul className="navlinks">
               <li>
-                <Link to="/">Home</Link>
+                <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <a href="#" id="shop">
+                <NavLink to="/shop" id="shop">
                   Shop
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#" id="about">
+                <NavLink to="/about" id="about">
                   About
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#" id="contact">
+                <NavLink to="/contact" id="contact">
                   Contact
-                </a>
+                </NavLink>
               </li>
             </ul>
             <ul className="icons">
               <li>
-                <a href="#" id="logo1">
+                <NavLink to="" id="logo1">
                   <img src={Vector1} alt="" className="navIcons" />
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#" id="logo2">
+                <NavLink to="" id="logo2">
                   <img src={Vector2} alt="" className="navIcons" />
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#" id="logo3">
+                <NavLink to="" id="logo3">
                   <img src={Vector3} alt="" className="navIcons" />
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#" id="logo4">
+                <NavLink to="" id="logo4">
                   <img src={Vector4} alt="" className="navIcons" />
-                </a>
+                </NavLink>
               </li>
             </ul>
           </nav>

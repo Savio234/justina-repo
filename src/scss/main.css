@@ -53,31 +53,34 @@ nav ul li {
   justify-content: center;
 }
 
-#products {
+.products {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
   justify-content: center;
   width: 100%;
+  margin-top: 50px;
 }
 
-#products2 {
+.products1 {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
   justify-content: center;
   width: 100%;
+  margin-top: 50px;
 }
 
-#products3 {
+.products2 {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
   justify-content: center;
   width: 100%;
+  margin-top: 50px;
 }
 
-.productDiv {
+.product-img {
   width: 25%;
 }
 
@@ -117,16 +120,17 @@ nav ul li {
 
 .footerLinks {
   display: flex;
-  gap: 100px;
-  align-items: center;
+  gap: 140px;
   padding: 40px;
   color: #9F9F9F;
+  line-height: 30px;
 }
 
 .footerLinksBlock {
   display: flex;
   flex-direction: column;
   color: #9F9F9F;
+  margin-top: 50px;
 }
 
 .footerParagraph {
@@ -135,4 +139,22 @@ nav ul li {
 
 .navIcons {
   width: 15px;
+}
+
+.emailLinkFlex {
+  display: flex;
+  gap: 20px;
+}
+
+#emailLink {
+  border: none;
+  border-bottom: solid 3px black;
+}
+
+#emailLink:focus {
+  outline: none;
+}
+
+#emailBtn {
+  border-bottom: solid 3px black;
 }/*# sourceMappingURL=main.css.map */

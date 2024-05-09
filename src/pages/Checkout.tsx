@@ -21,28 +21,48 @@ const Checkout: React.FC = () => {
       </div>
       <div>
         <h1>Billing Details</h1>
-        <form action="">
-          <div>
-            <label htmlFor="">First Name</label>
-            <input type="text" name="" id="" />
-            <label htmlFor="">Last Name</label>
-            <input type="text" name="" id="" />
+        <form action="" className="billingForm">
+          <div className="billingFormFlex">
+            <label htmlFor="" className="labels">
+              First Name
+            </label>
+            <input type="text" name="" id="" className="inputs" />
+            <label htmlFor="" className="labels">
+              Last Name
+            </label>
+            <input type="text" name="" id="" className="inputs" />
           </div>
-          <label htmlFor="">Company Name(Optional)</label>
-          <input type="text" name="" id="" />
-          <label htmlFor="">Street Address</label>
-          <input type="text" name="" id="" />
-          <label htmlFor="">Town / City</label>
-                  <input type="text" name="" id="" />
-          <label htmlFor="">Zip Code</label>
-                  <input type="text" name="" id="" />
-          <label htmlFor="">Phone</label>
-                  <input type="tel" name="" id="" />
-          <label htmlFor="">Email address</label>
-                  <input type="email" name="" id="" />
-                  <input type="text" name="" id="" placeholder="Additional Information" />
-
-                  
+          <label htmlFor="" className="labels">
+            Company Name(Optional)
+          </label>
+          <input type="text" name="" id="" className="inputs" />
+          <label htmlFor="" className="labels">
+            Street Address
+          </label>
+          <input type="text" name="" id="" className="inputs" />
+          <label htmlFor="" className="labels">
+            Town / City
+          </label>
+          <input type="text" name="" id="" className="inputs" />
+          <label htmlFor="" className="labels">
+            Zip Code
+          </label>
+          <input type="text" name="" id="" className="inputs" />
+          <label htmlFor="" className="labels">
+            Phone
+          </label>
+          <input type="tel" name="" id="" className="inputs" />
+          <label htmlFor="" className="labels">
+            Email address
+          </label>
+          <input type="email" name="" id="" className="inputs" />
+          <input
+            className="inputs"
+            type="text"
+            name=""
+            id=""
+            placeholder="Additional Information"
+          />
         </form>
       </div>
     </>

@@ -19,6 +19,7 @@ $width3: 40%;
 $width4: 0%;
 $width5: 25%;
 $width6: 20px;
+$width7: 100px;
 $height2: 65vh;
 $height: 30vh;
 $m-left: 100px;
@@ -129,8 +130,15 @@ $text-underline: underline;
     background-color: $b-white;
         border: $b-ash;
     }
-#asgardSofa,
+
 .outdoorSofa{
+    border-radius: $b-radius2;
+    width: $width7;
+    display: $d-flex;
+    flex-direction: $f-column;
+   
+}
+#asgardSofa{
     border-radius: $b-radius2;
 }
 .asgaardHeader
