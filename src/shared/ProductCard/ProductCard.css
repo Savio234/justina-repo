@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 1.6rem;
+}
+.image_container {
+    width: 28.7rem;
+    height: 28.7rem;
+}
+.image {
+    width: 28.3rem;
+    height: 18.8rem;
+}
+.texts {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+}
+.texts p {
+    font-weight: 400;
+    color: #000;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+.texts h3 {
+    font-weight: 500;
+    color: #000;
+    font-size: 2.4rem;
+    line-height: 3.6rem;
+    font-family: 'Times New Roman', Times, serif;
+}

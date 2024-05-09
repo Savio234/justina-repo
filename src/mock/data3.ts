@@ -1,6 +1,5 @@
-import { Product } from "./types/productlist";
-
-export const sampleProducts3: Product[] = [
+// eslint-disable-next-line
+export default [
     {
         name: 'Trenton Modular Sofa-3',
         image: './src/assets/trenton.png',

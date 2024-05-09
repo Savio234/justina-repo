@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import SortItems from './components/Sort'
 import Hero from './components/Hero';
-import Footer from './components/Footer'
+import Footer from './shared/Footer/Footer'
 import './scss/main.scss';
 import './scss/color/color.scss';
 import './scss/typography/fonts.scss';
@@ -21,8 +21,7 @@ const App: React.FC = () => {
       <SortItems />
       <Outlet />
       <Guarantee />
-   <Footer />
-  
+      <Footer />
     </>
   );
 }

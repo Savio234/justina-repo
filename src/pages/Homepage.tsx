@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { sampleProducts } from "../data";
-import { sampleProducts2 } from "../data2";
-import { sampleProducts3 } from "../data3";
-import Products from "./Products";
+import { ProductCard } from "../shared";
+import { Product } from "../types/productlist";
+import { data, data2, data3 } from "../mock";
 
 const Homepage: React.FC = () => {
   const [activeProducts, setActiveProducts] = useState<number>(1);
@@ -22,42 +20,31 @@ const Homepage: React.FC = () => {
   if (activeProducts === 1) {
     productList = (
       <div id="products">
-        {sampleProducts.map((product, index) => (
-          <div className="productdiv" key={index}>
-            <img src={product.image} alt={product.name} id="product-img" />
-            <Link id="productLinks" to={"/products/" + Products}>
-              <h4>{product.name}</h4>
-              <h3>Rs. {product.price}</h3>
-            </Link>
-          </div>
+        {data.map((product: Product, index: number) => (
+          <ProductCard key={index} {...product} />
         ))}
       </div>
     );
   } else if (activeProducts === 2) {
     productList = (
       <div id="products2">
-        {sampleProducts2.map((product, index) => (
-          <div className="productdiv" key={index}>
-            <img src={product.image} alt={product.name} id="product-img" />
-            <Link id="productLinks" to={"/products/" + Products}>
-              <h4>{product.name}</h4>
-              <h3>Rs. {product.price}</h3>
-            </Link>
-          </div>
+        {data2.map((product: Product, index: number) => (
+          <ProductCard key={index} {...product} />
         ))}
       </div>
     );
   } else if (activeProducts === 3) {
     productList = (
       <div id="products3">
-        {sampleProducts3.map((product, index) => (
-          <div className="productdiv" key={index}>
-            <img src={product.image} alt={product.name} id="product-img" />
-            <Link id="productLinks" to={"/products/" + Products}>
-              <h4>{product.name}</h4>
-              <h3>Rs. {product.price}</h3>
-            </Link>
-          </div>
+        {data3.map((product: Product, index: number) => (
+          // <div className="productdiv" key={index}>
+          //   <img src={product.image} alt={product.name} id="product-img" />
+          //   <Link id="productLinks" to={"/products/" + Products}>
+          //     <h4>{product.name}</h4>
+          //     <h3>Rs. {product.price}</h3>
+          //   </Link>
+          // </div>
+          <ProductCard key={index} {...product} />
         ))}
       </div>
     );
