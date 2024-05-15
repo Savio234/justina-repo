@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import Products from "../../pages/Products";
+// import Products from "../../pages/Products";
 import { Product } from '../../types/productlist'
 
 const ProductCard = ({image, name, price}: Product) => {
   return (
     <div className='container'>
-        <Link id="productLinks" to={"/products/" + Products}>
+        {/* <Link id="productLinks" to={`/products/${product.id}`}> */}
+        <Link id="productLinks" to={`/products`}>
             <div className="image_container">
                 <div className="image">
                     <img src={image} alt="" />

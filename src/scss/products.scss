@@ -1,0 +1,185 @@
+$d-flex: flex;
+$padding-body: 0;
+$p-body: 30px;
+$p-20: 8px;
+$p-40: 40px;
+$w-20: 50px;
+$navposition: fixed;
+$top: 0;
+$space-between: space-between;
+$justify-center: center;
+$justify-flex-end: flex-end;
+$text-center: center;
+$align-center: center;
+$object-fit: cover;
+$background-repeat: inherit;
+$width: 100%;
+$width2: 100vw;
+$width3: 40%;
+$width4: 0%;
+$width5: 25%;
+$width6: 20px;
+$height2: 65vh;
+$height: 30vh;
+$m-left: 100px;
+$m-right: 100px;
+$m-top: 50px;
+$m-top2: 50px;
+$m-bottom: 50px;
+$p-top: 80px;
+$p-bottom: 80px;
+$text-center: center;
+$herobg: url('/src/assets/heroimage.png');
+$f-direction: column;
+$f-wrap: wrap;
+$f-1: 1;
+$gap1: 60px;
+$gap2: 20px;
+$gap3: 100px;
+$b-radius: 50%;
+$b-radius2: 15px;
+$b-white: white;
+$b-black: 1px solid #000;
+$b-ash: 1px solid #9F9F9F;
+$b-ash2: #9F9F9F;
+$black: #000;
+$f-35: 35px;
+$f-20: 25px;
+$b-right: 2px solid #9F9F9F;
+$f-column: column;
+$f-row: row;
+$f-wrap: flex wrap;
+$text-underline: underline;
+
+
+
+.homeLink{
+    display: $d-flex;
+    align-items: $align-center;
+    gap: $gap2;
+    padding: $p-40;
+
+}
+.homeLink a{
+    color: $b-ash2;
+}
+.homeLink a:hover {
+    color: $b-ash2;
+}
+.sofaDescription{
+    display: $d-flex;
+    gap: $gap2;
+    padding: $p-40;
+    justify-content: $justify-center;
+}
+.sofaCollection{
+    display: $d-flex;
+    flex-direction: $f-direction;
+}
+.starIcons{
+    display: $d-flex;
+    gap: $gap2;
+}
+.custReview{
+    display: $d-flex;
+    flex: $f-1;
+}
+.sizes{
+    display: $d-flex;
+    gap: $gap2;
+}
+.sizesBtn{
+    width: $width6;
+  justify-content: $justify-center;
+    display: $d-flex;
+}
+.colorsBtn1, 
+.colorsBtn2,
+.colorsBtn3{
+    border-radius: $b-radius;
+}
+.colorsBtn{
+    display: $d-flex;
+    gap: $gap2;
+    margin-bottom: $m-bottom;
+}
+.addItems{
+    display: $d-flex;
+}
+.addCartItems{
+    display: $d-flex;
+    align-items: $align-center;
+    gap: $gap2;
+}
+.addItemsCount{
+    display: $d-flex;
+    gap: $gap2;
+    background-color: $b-white;
+    border: $b-black;
+}
+.addItemsCount:hover{
+    background-color: $b-white;
+        border: $b-ash;
+}
+.addToCartBtn{
+    background-color: $b-white;
+    border: $b-black;
+}
+.addToCartBtn:hover{
+    background-color: $b-white;
+        border: $b-ash;
+    }
+#asgardSofa,
+.outdoorSofa{
+    border-radius: $b-radius2;
+}
+.asgaardHeader
+{
+    font-size: $f-35;
+}
+.chevronBorder,
+#halfstar{
+border-right: $b-right;
+}
+.sofaPrice{
+    color: $b-ash2;
+}
+.socialIcons{
+    display: $d-flex;
+    gap: $gap2;
+    
+}
+.description{
+    padding: $p-40;
+}
+.asgardsofa2{
+    display: $d-flex;
+    gap: $gap2;
+    margin-bottom: $m-bottom;
+}
+.descriptionHeader{
+    font-size: $f-20;
+}
+#relatedProducts{
+    display: $d-flex;
+            // flex-direction: $f-direction;
+        flex-wrap: $f-wrap;
+            justify-content: $justify-center;
+            width: $width;
+            margin-bottom: $m-bottom;
+    
+
+}
+#relProductsHeader{
+    font-size: $f-20;
+    text-align: $text-center;
+}
+#viewMore{
+    color: $black;
+    display: $d-flex;
+    justify-content: $justify-center;
+    
+}
+#viewMore:hover{
+    text-decoration: underline;
+}

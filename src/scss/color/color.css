@@ -1,5 +1,37 @@
 .navlinks li a,
 .icons li a,
-.heroTexts a {
+.heroTexts a,
+.productLinks,
+h2,
+h3,
+h4,
+.footerLinksBlock a {
   color: #000;
+}
+
+.sizesBtn {
+  background-color: #FAF4F4;
+  border: #FAF4F4;
+}
+
+.sizesBtn:hover {
+  background-color: #FBEBB5;
+  border: #FAF4F4;
+}
+
+.colorsBtn1 {
+  background-color: #816DFA;
+}
+
+.colorsBtn2 {
+  background-color: #000;
+}
+
+.colorsBtn3 {
+  background-color: #CDBA7B;
+}
+
+#asgardSofa,
+.outdoorSofa {
+  background-color: #FFF9E5;
 }/*# sourceMappingURL=color.css.map */

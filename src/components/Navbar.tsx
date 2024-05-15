@@ -1,8 +1,9 @@
-import React from 'react';
-import { FaCartPlus } from "react-icons/fa";
-import { CgProfile } from "react-icons/cg";
-import { CiSearch } from "react-icons/ci";
-import { CiHeart } from "react-icons/ci";
+import React from "react";
+import Vector1 from "../assets/Vector1.png";
+import Vector2 from "../assets/Vector2.png";
+import Vector3 from "../assets/Vector3.png";
+import Vector4 from "../assets/Vector4.png";
+import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   return (
@@ -10,11 +11,9 @@ const Navbar: React.FC = () => {
       <div id="navigation-bar">
         <header>
           <nav>
-            <ul className='navlinks'>
+            <ul className="navlinks">
               <li>
-                <a href="#" id="home">
-                  Home
-                </a>
+                <Link to="/">Home</Link>
               </li>
               <li>
                 <a href="#" id="shop">
@@ -32,25 +31,25 @@ const Navbar: React.FC = () => {
                 </a>
               </li>
             </ul>
-            <ul className='icons'>
+            <ul className="icons">
               <li>
                 <a href="#" id="logo1">
-                  <CgProfile />
+                  <img src={Vector1} alt="" className="navIcons" />
                 </a>
               </li>
               <li>
                 <a href="#" id="logo2">
-                  <CiSearch />
+                  <img src={Vector2} alt="" className="navIcons" />
                 </a>
               </li>
               <li>
                 <a href="#" id="logo3">
-                  <CiHeart />
+                  <img src={Vector3} alt="" className="navIcons" />
                 </a>
               </li>
               <li>
                 <a href="#" id="logo4">
-                  <FaCartPlus />
+                  <img src={Vector4} alt="" className="navIcons" />
                 </a>
               </li>
             </ul>
@@ -59,8 +58,6 @@ const Navbar: React.FC = () => {
       </div>
     </>
   );
-}
-
-
+};
 
 export default Navbar;

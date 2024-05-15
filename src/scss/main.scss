@@ -9,12 +9,14 @@ $list-style: none;
 $gap1: 60px;
 $gap2: 20px;
 $gap3:100px;
+$gap4:140px;
 $nav-gap: 5rem;
 $padding-body: 0;
 $p-body: 30px;
 $p-20: 8px;
 $p-40: 40px;
 $w-20: 50px;
+$w-15: 15px;
 $navposition: fixed;
 $top: 0;
 $space-between: space-between;
@@ -110,7 +112,7 @@ nav ul li{
     justify-content: $justify-center;
 
 }
-#products{
+.products{
     display: $d-flex;
     flex-wrap: $f-wrap;
     // justify-content: $justify-center;
@@ -119,23 +121,25 @@ nav ul li{
     align-items: center;
     gap: 3rem;
 }
-#products2{
+.products1{
     display: $d-flex;
     flex-wrap: $f-wrap;
     list-style: $list-style;
     justify-content: $justify-center;
-    width: 100%;
+    width: $width;
+    margin-top: $m-top2;
 
 }
-#products3{
+.products2{
     display: $d-flex;
     flex-wrap: $f-wrap;
     list-style: $list-style;
     justify-content: $justify-center;
-    width: 100%;
+    width: $width;
+    margin-top: $m-top2;
  
 }
-.productDiv{
+.product-img{
     width: $width5;
 }
 .numbers{
@@ -174,17 +178,27 @@ nav ul li{
 }
 .footerLinks{
     display: $d-flex;
-    gap: $gap3;
-    align-items: $align-center;
+    gap: $gap4;
     padding: $p-40;
+    color: $b-ash2;
+    line-height: $l-height;
+  
 }
+
 .footerLinksBlock{
     display: $d-flex;
     flex-direction: $flex-column;
+    color: $b-ash2;
+    margin-top: $m-top2;
+
     
 }
+// .footerLinkCol{
+//     margin-bottom: $m-bottom;
+// }
 .footerParagraph{
     padding: $p-40;
+   
 }
 // #product-image{
 //     width: $width5;
