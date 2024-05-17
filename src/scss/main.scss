@@ -68,6 +68,10 @@ nav{
     gap: $nav-gap;
     
 }
+.navFlex{
+    display: flex;
+    gap: 5rem;
+}
 ul{
     display: $d-flex;
     justify-content: $space-between;
@@ -76,6 +80,18 @@ ul{
 nav ul li{
     list-style: $list-style;
  
+}
+#searchInput{
+    width: 120px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.searchResults{
+    display: $d-flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    //margin-top: 50px;
 }
 // .heroimage{
 //     object-fit: $object-fit;
@@ -115,10 +131,7 @@ flex-wrap: $f-wrap;
     margin-top: $m-top2;
     gap: $gap2;
 }
-.productdiv{
-    background-color: $background-hover;
 
-}
 .img-container{
     width: 283px;
     height: 188px;
@@ -167,7 +180,7 @@ flex-wrap: $f-wrap;
 .numberDesign{
     background-color: $background-color;
     padding: $p-20;
-    width: $w-20;
+    width: 75px;
     border: $background-color;
 
 }

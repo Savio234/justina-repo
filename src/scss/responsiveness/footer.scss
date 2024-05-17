@@ -17,7 +17,6 @@ $p-20: 8px;
 $p-40: 40px;
 $w-20: 50px;
 $w-15: 15px;
-$f-size: 15px;
 $navposition: fixed;
 $top: 0;
 $space-between: space-between;
@@ -32,7 +31,7 @@ $width2: 100vw;
 $width3: 40%;
 $width4: 0%;
 $width5: 25%;
-$width6: 200px;
+$width6: 250px;
 $height2: 65vh;
 $height: 30vh;
 $m-left: 100px;
@@ -55,33 +54,35 @@ $l-height: 30px;
 $b-none: none;
 $b-bottom: solid 3px black;
 
-.inputs{
 
-    margin-top: $m-top;
-    width: 25rem;
-        padding: 8px;
-        margin-top: 50px;
-        padding: 14px;
-        border: 1px solid black;
-        border-radius: 20px;
-    }
-.nameInput{
-    margin-top: $m-top;
-        width: 15rem;
-        padding: 8px;
-        margin-top: 50px;
-        padding: 14px;
-        border: 1px solid black;
-        border-radius: 20px;
+@media (max-width: 480px) {
+   
+
+
+
 }
 
-.labels{
-    font-size: $f-size;
-    margin-top: $m-top;
-}
-.billingForm{
-    display: grid;
-        justify-content: start;
-        justify-items: stretch;
-        padding: 20px;
+@media (max-width: 768px) {}
+
+@media (max-width: 1024px) {}
+
+@media (max-width: 1200px) {
+    .footerLinks {
+            display: $d-flex;
+            justify-content: space-evenly;
+            gap: $gap4;
+            padding: $p-40;
+            color: $b-ash2;
+            line-height: $l-height;
+    
+        }
+    
+        .footerLinksBlock {
+            display: $d-flex;
+            flex-direction: $flex-column;
+            color: $b-ash2;
+            margin-top: $m-top2;
+    
+    
+        }
 }

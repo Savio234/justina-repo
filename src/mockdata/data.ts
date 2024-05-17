@@ -1,6 +1,6 @@
-import { Product } from "./types/productlist";
+import { Product } from "../types/productlist";
 
-export const sampleProducts3: Product[] = [
+export const sampleProducts: Product[] = [
     {
         name: 'Trenton Modular Sofa-3',
         image: './src/assets/trenton.png',
@@ -8,12 +8,6 @@ export const sampleProducts3: Product[] = [
 
     },
 
-    {
-        name: 'Granite Dining Table with Dining Chair',
-        image: './src/assets/granitedining.png',
-        price: 25000.00
-
-    },
 
     {
         name: 'Outdoor Bar Table and Stool',
@@ -29,6 +23,12 @@ export const sampleProducts3: Product[] = [
     },
     {
         name: '',
+        image: './src/assets/trenton.png',
+        price: 25000.00
+
+    },
+    {
+        name: 'Trenton Modular Sofa-3',
         image: './src/assets/trenton.png',
         price: 25000.00
 

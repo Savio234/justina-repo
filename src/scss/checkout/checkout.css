@@ -1,1 +1,31 @@
-/*# sourceMappingURL=checkout.css.map */
+.inputs {
+  margin-top: 50px;
+  width: 25rem;
+  padding: 8px;
+  margin-top: 50px;
+  padding: 14px;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+.nameInput {
+  margin-top: 50px;
+  width: 15rem;
+  padding: 8px;
+  margin-top: 50px;
+  padding: 14px;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+.labels {
+  font-size: 15px;
+  margin-top: 50px;
+}
+
+.billingForm {
+  display: grid;
+  justify-content: start;
+  justify-items: stretch;
+  padding: 20px;
+}/*# sourceMappingURL=checkout.css.map */

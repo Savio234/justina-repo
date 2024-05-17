@@ -1,6 +1,6 @@
-import { Product } from "./types/productlist";
+import { Product } from "../types/productlist";
 
-export const sampleProducts2: Product[] = [
+export const sampleProducts3: Product[] = [
     {
         name: 'Trenton Modular Sofa-3',
         image: './src/assets/trenton.png',
@@ -63,5 +63,16 @@ export const sampleProducts2: Product[] = [
         price: 25000.00
 
     },
-   
+    {
+        name: 'Trenton Modular Sofa-3',
+        image: './src/assets/trenton.png',
+        price: 25000.00
+
+    },
+    {
+        name: 'Trenton Modular Sofa-3',
+        image: './src/assets/trenton.png',
+        price: 25000.00
+
+    },
 ]

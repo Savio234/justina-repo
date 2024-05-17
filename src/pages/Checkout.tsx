@@ -26,11 +26,11 @@ const Checkout: React.FC = () => {
             <label htmlFor="" className="labels">
               First Name
             </label>
-            <input type="text" name="" id="" className="inputs" />
+            <input type="text" name="" id="" className="inputs nameInput" />
             <label htmlFor="" className="labels">
               Last Name
             </label>
-            <input type="text" name="" id="" className="inputs" />
+            <input type="text" name="" id="" className="inputs nameInput" />
           </div>
           <label htmlFor="" className="labels">
             Company Name(Optional)

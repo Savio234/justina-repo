@@ -1,47 +1,87 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-//import Products from "./Products";
+import { setProducts } from "../redux/actions/productActions";
+// import { productReducer } from "../redux/reducers/productReducer";
+// import ProductDetail from "./Products";
 
 const Homepage: React.FC = () => {
-  const [activeProducts, setActiveProducts] = useState<number>(1);
-  const [, setPreviousProducts] = useState<number>(-1)
-  const [sampleProducts, setSampleProducts] = useState<any[]>([]);
+  const [activePage, setActivePage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [productsPerPage] = useState<number>(16);
+  const [displayedProducts, setDisplayedProducts] = useState<any[]>([]);
+  const [allProducts, setAllProducts] = useState<any[]>([]);
   const api = "https://dummyjson.com/products";
-console.log(sampleProducts)
+  const products = useSelector((state) => state)
+  const dispatch = useDispatch();
+
+
   useEffect(() => {
     fetch(api)
       .then((response) => response.json())
-      .then((data) => setSampleProducts(data.products));
+      .then((data) => {
+        let fetchedProducts = data.products;
+        // Repeat some products to ensure enough for pagination
+        const repetitionsNeeded = Math.ceil(
+          productsPerPage / fetchedProducts.length
+        );
+
+        console.log(data);
+        dispatch(setProducts(data))
+        fetchedProducts = Array.from(
+          { length: repetitionsNeeded },
+          () => fetchedProducts
+        ).flat();
+        setAllProducts(fetchedProducts);
+        setTotalPages(Math.ceil(fetchedProducts.length / productsPerPage));
+        setDisplayedProducts(fetchedProducts.slice(0, productsPerPage));
+      });
+    console.log("Products: ", products)
   }, []);
 
-  const handleNextClick = () => {
-    setActiveProducts((prevActiveProducts) => {
-      if (prevActiveProducts === 3) {
-        return 1;
-      } else {
-        return prevActiveProducts + 1;
-      }
-    });
+  const handleNextPage = () => {
+    if (activePage < totalPages) {
+      const nextPage = activePage + 1;
+      setActivePage(nextPage);
+      const startIndex = (nextPage - 1) * productsPerPage;
+      const nextPageProducts = allProducts.slice(
+        startIndex,
+        startIndex + productsPerPage
+      );
+      setDisplayedProducts(nextPageProducts);
+    }
   };
 
-  const handlePreviousClick = () => {
-    setPreviousProducts((prevPreviousProducts) => {
-      if (prevPreviousProducts === 1) {
-        return 3;
-      }
-      else {
-        return prevPreviousProducts - 1; 
-      }
-    })
-  }
+  const handlePreviousPage = () => {
+    if (activePage > 1) {
+      const previousPage = activePage - 1;
+      setActivePage(previousPage);
+      const startIndex = (previousPage - 1) * productsPerPage;
+      const previousPageProducts = allProducts.slice(
+        startIndex,
+        startIndex + productsPerPage
+      );
+      setDisplayedProducts(previousPageProducts);
+    }
+  };
+
+  const handlePageClick = (pageNumber: number) => {
+    setActivePage(pageNumber);
+    const startIndex = (pageNumber - 1) * productsPerPage;
+    const pageProducts = allProducts.slice(
+      startIndex,
+      startIndex + productsPerPage
+    );
+    setDisplayedProducts(pageProducts);
+  };
 
   return (
     <>
       <main>
-        {sampleProducts.length > 0 && (
-          <div className={`products${activeProducts}`} id="allProducts">
-            {sampleProducts.map((product) => (
-              <div className="productdiv" key={product.id}>
+        <div className="products" id="allProducts">
+          {displayedProducts.map((product, index) => (
+            <div className="productdiv" key={index}>
+              <Link to={`/products/${product.id}`}>
                 <div className="img-container">
                   <img
                     src={product.images[0]}
@@ -49,38 +89,33 @@ console.log(sampleProducts)
                     className="product-img"
                   />
                 </div>
-                <Link id="productLinks" to={`/products/${product.id}`}>
+                <div id="productLinks">
                   <h4>{product.title}</h4>
                   <h3>Rs. {product.price}</h3>
-                </Link>
-              </div>
-            ))}
-          </div>
-        )}
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
       </main>
+      
       <div className="numbers">
-        <button
-          className="numberDesign"
-          onClick={() => (setActiveProducts(1), setPreviousProducts(1))}
-        >
-          1
-        </button>
-        <button
-          className="numberDesign"
-          onClick={() => (setActiveProducts(2), setPreviousProducts(2))}
-        >
-          2
-        </button>
-        <button
-          className="numberDesign"
-          onClick={() => (setActiveProducts(3), setPreviousProducts(3))}
-        >
+        {[...Array(totalPages).keys()].map((pageNumber) => (
+          <button
+            key={pageNumber + 1}
+            className="numberDesign"
+            onClick={() => handlePageClick(pageNumber + 1)}
+          >
+            {pageNumber + 1}
+          </button>
+        ))}
+        {/* <button className="numberDesign" onClick={() => handlePageClick(3)}>
           3
-        </button>
-        <button className="numberDesign" onClick={handlePreviousClick}>
+        </button> */}
+        <button className="numberDesign" onClick={handlePreviousPage}>
           Previous
         </button>
-        <button className="numberDesign" onClick={handleNextClick}>
+        <button className="numberDesign" onClick={handleNextPage}>
           Next
         </button>
       </div>
