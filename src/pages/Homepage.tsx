@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { setProducts } from "../redux/actions/productActions";
-// import { productReducer } from "../redux/reducers/productReducer";
+//import { productReducer } from "../redux/reducers/productReducer";
 // import ProductDetail from "./Products";
 
 const Homepage: React.FC = () => {
@@ -98,7 +98,7 @@ const Homepage: React.FC = () => {
           ))}
         </div>
       </main>
-      
+
       <div className="numbers">
         {[...Array(totalPages).keys()].map((pageNumber) => (
           <button

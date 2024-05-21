@@ -1,22 +1,26 @@
 @media (max-width: 480px) {
 .sofaCollections{
+    display: block;
+    
+}
+.singleImage{
     display: none;
 }
-.sofaDescription{
-    display: block;
-}
+    .sofaDescription {
+        display: block;
+    }
 
 }
 
 @media (max-width: 768px) {
 
-.sofaCollections {
-        display: none;
-    }
+// .sofaCollections {
+//         display: none;
+//     }
 
-    .sofaDescription {
-        display: block;
-    }
+//     .sofaDescription {
+//         display: block;
+//     }
 
 }
 

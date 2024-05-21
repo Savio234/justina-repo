@@ -1,30 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import staricon from "../assets/staricon.png";
 import halfstar from "../assets/halfstar.png";
 import facebook from "../assets/facebook.png";
 import linkedin from "../assets/linkedin.png";
 import twitter from "../assets/twitter.png";
+import { Carousel } from "react-responsive-carousel";
+import { useDispatch, useSelector } from "react-redux";
+import { selectedProduct } from "../redux/actions/productActions";
 
 const ProductDetail: React.FC = () => {
+  const product = useSelector((state: any) => state.product.product);
   const { productId } = useParams<{ productId: string }>();
-  const [product, setProduct] = useState<any>(null);
+  const dispatch = useDispatch();
 
+console.log(product)
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(
+        const response = await axios.get(
           `https://dummyjson.com/products/${productId}`
         );
-        const data = await response.json();
-        setProduct(data);
+        const data = response.data;
+        console.log("Fetched product data:", data);
+        dispatch(selectedProduct(data));
       } catch (error) {
         console.error("Error fetching product:", error);
       }
     };
 
     fetchProduct();
-  }, [productId]);
+  }, [productId, dispatch]);
+
+  console.log("Product from Redux state:", product); 
 
   if (!product) {
     return <div>Loading...</div>;
@@ -32,17 +41,21 @@ const ProductDetail: React.FC = () => {
 
   return (
     <div className="sofaDescription">
-      <div className="sofaCollections">
-        {product.images.map((image: string, id: number) => (
-          <img
-            key={id}
-            src={image}
-            alt={`Product ${id}`}
-            className="outdoorSofa"
-          />
-        ))}
-      </div>
-      <div>
+      {product.images && (
+        <div className="sofaCollections">
+          <Carousel className="carousel">
+            {product.images.map((image: string, id: number) => (
+              <img
+                key={id}
+                src={image}
+                alt={`Product ${id}`}
+                className="outdoorSofa"
+              />
+            ))}
+          </Carousel>
+        </div>
+      )}
+      <div className="singleImage">
         <img src={product.thumbnail} alt={product.title} id="asgardSofa" />
       </div>
       <div>

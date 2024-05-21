@@ -18,6 +18,8 @@ import "./scss/responsiveness/guarantee.scss"
 import "./scss/responsiveness/navbar.scss"
 import "./scss/responsiveness/footer.scss"
 import "./scss/responsiveness/product.scss"
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Carts from "./pages/Cart";
 //import {Provider} from "react-redux"
 
 const App: React.FC = () => {
@@ -32,6 +34,8 @@ const App: React.FC = () => {
           <Route path="/products/:productId" element={<Products />} />
           <Route path="/products" element={<Products />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/cart" element={<Carts />} />
+
           
         </Routes>
         <Guarantee />
