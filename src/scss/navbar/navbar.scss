@@ -1,0 +1,194 @@
+$white: white;
+$d-flex: flex;
+$d-block: block;
+$d-none: none;
+$list-style: none;
+$nav-gap: 5rem;
+$justify-center: center;
+$justify-flex-end: flex-end;
+$navposition: fixed;
+$top: 0;
+$width2: 100vw;
+$width4: 0%;
+$w-15: 15px;
+$b-none: none;
+$b-bottom: solid 3px black;
+
+// Main navigation bar styles
+nav {
+    position: $navposition;
+    top: $top;
+    background: $white;
+    width: 100%;
+    display: $d-flex;
+    justify-content: $justify-center;
+    gap: $nav-gap;
+}
+
+.navFlex {
+    display: flex;
+    gap: 10rem;
+}
+
+ul {
+    display: $d-flex;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+nav ul li {
+    list-style: $list-style;
+}
+
+.navIcons {
+    width: $w-15;
+}
+
+.navlinks {
+    display: flex;
+    justify-content: $justify-flex-end;
+    gap: 60px;
+}
+
+.icons {
+    width: 100%;
+    display: flex;
+    gap: 5rem;
+    align-items: center;
+}
+
+#searchInput {
+    border: $b-none;
+    border-bottom: $b-bottom;
+}
+
+#searchInput:focus {
+    outline: $b-none;
+}
+
+.searchResults {
+    display: $d-flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+// Responsive styles
+@media (max-width: 480px) {
+    nav {
+        display: block;
+        gap: $nav-gap;
+    }
+
+    .navlinks {
+        display: none;
+    }
+
+    .icons {
+        display: flex;
+        font-size: 1.1rem;
+    }
+
+    .navbar-container {
+        display: block;
+        width: 100%;
+    }
+
+    ul {
+        display: block;
+    }
+
+    nav ul li {
+        margin-bottom: 20px;
+    }
+
+    .navFlex {
+        display: flex;
+        gap: 30rem;
+    }
+
+    .menu-open .navlinks {
+            display: block;
+                margin-left: -533px;
+                margin-top: 50px;
+        
+        
+    }
+
+    .menu-open .icons {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    
+    nav {
+            display: block;
+            gap: $nav-gap;
+        }
+    
+        .navlinks {
+            display: none;
+        }
+    
+        .icons {
+            display: flex;
+            font-size: 1.1rem;
+        }
+    
+        .navbar-container {
+            display: block;
+            width: 100%;
+        }
+    
+        ul {
+            display: block;
+        }
+    
+        nav ul li {
+            margin-bottom: 20px;
+        }
+    
+        .navFlex {
+            display: flex;
+            gap: 30rem;
+        }
+    
+        .menu-open .navlinks {
+                display: block;
+                    margin-left: -533px;
+                    margin-top: 50px;
+            
+    
+        }
+    
+        .menu-open .icons {
+            display: none;
+        }
+    
+}
+@media (min-width: 600px){
+
+}
+@media (max-width: 1024px) {
+    nav {
+        display: flex;
+        justify-content: $justify-center;
+        gap: $nav-gap;
+    }
+
+    .navDisplay {
+        display: block;
+    }
+}
+
+@media (max-width: 1200px) {
+    nav {
+        display: flex;
+        justify-content: $justify-center;
+        gap: $nav-gap;
+    }
+
+    .navDisplay {
+        display: block;
+    }
+}

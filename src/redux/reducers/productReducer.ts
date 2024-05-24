@@ -41,7 +41,7 @@ export const selectedProductReducer = (state = {}, type: any, payload: any) => {
         case ActionTypes.SELECTED_PRODUCT:
             return {
                 ...state,
-                product: payload || []
+                product: payload 
             };
         default:
           return state;

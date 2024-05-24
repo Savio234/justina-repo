@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-//import styled from "styled-components";
+import React, { useState, useContext } from "react";
+import { ShopContext } from "../context/ShopContext";
 
 interface SearchProps {
   onSearch: (query: string) => void;
@@ -7,6 +7,34 @@ interface SearchProps {
 
 const Search: React.FC<SearchProps> = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const { setSearchResults } = useContext(ShopContext); // Added this line
+
+ if (!setSearchResults) {
+   // Added this line
+   throw new Error("Search must be used within a ShopContextProvider"); // Added this line
+ }
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSearch = async (query: string) => {
+    setLoading(true);
+    setError("");
+    try {
+      const response = await fetch(
+        `https://dummyjson.com/products/search?q=${query}`
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      setSearchResults(data.products);
+      setLoading(false);
+    } catch (error) {
+      setError("Error fetching data");
+      setLoading(false);
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -14,19 +42,28 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    handleSearch(searchQuery);
     onSearch(searchQuery);
     setSearchQuery("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="search"
-        value={searchQuery}
-        onChange={handleChange}
-      />
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="search"
+          value={searchQuery}
+          onChange={handleChange}
+          id="searchInput"
+        />
+      </form>
+
+      <div>
+        {loading && <div>Loading...</div>}
+        {error && <div>{error}</div>}
+      </div>
+    </>
   );
 };
 

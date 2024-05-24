@@ -3,3 +3,7 @@ export type Product = {
     image: string,
     price: number
 }
+export type Title = {
+    title: string
+    
+}

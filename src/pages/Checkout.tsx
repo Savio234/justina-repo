@@ -1,37 +1,34 @@
-import React from "react";
-//import meubel from './src/assets/meubel.png'
-import meubel from "/src/assets/meubel.png";
-import { SlArrowRight } from "react-icons/sl";
-// import heroimage from "/src/assets/heroimage.png";
-
+import React, { useContext } from "react";
+import { ShopContext } from "../context/ShopContext";
+import { Link } from "react-router-dom";
 
 const Checkout: React.FC = () => {
+  const context = useContext(ShopContext);
+
+  if (!context) {
+    // Handle the case where context is undefined
+    return <div>Loading...</div>;
+  }
+
+  const { getTotalCartAmount, cartItems, productData } = context;
+
+  const cartProducts =
+    productData?.filter((product) => cartItems[product.id] > 0) || [];
+
   return (
     <>
-      <div className="herobg">
-        <div className="hero">
-          <img src={meubel} alt="meubel" />
-          <h1>Checkout</h1>
-          <div className="heroTexts">
-            <a href="home">Home</a>
-            <SlArrowRight />
-            <a href="shop">Checkout</a>
-          </div>
-        </div>
-      </div>
-
       <h1 className="billDetails">Billing Details</h1>
       <div className="billingPage">
         <div>
           <form action="" className="billingForm">
             <div className="billingFormFlex">
-              <div>
+              <div className="names">
                 <label htmlFor="" className="labels">
                   First Name
                 </label>
                 <input type="text" name="" id="" className="inputs nameInput" />
               </div>
-              <div>
+              <div className="names">
                 <label htmlFor="" className="labels">
                   Last Name
                 </label>
@@ -62,7 +59,7 @@ const Checkout: React.FC = () => {
               Email address
             </label>
             <input type="email" name="" id="" className="inputs" />
-            
+
             <input
               className="inputs"
               type="text"
@@ -72,19 +69,27 @@ const Checkout: React.FC = () => {
             />
           </form>
         </div>
-        <div>
+        <div className="checkoutTotalDiv">
           <div className="checkoutTotal">
             <div>
               <h3>Product</h3>
-              <p>Asgaard x 1</p>
-              <p>Subtotal</p>
-              <p>Total</p>
+              {cartProducts.map((product) => (
+                <div key={product.id}>
+                  <p>{product.title}</p>
+                  <p>Price: Rs {product.price.toFixed(2)}</p>
+                  <p>Quantity: {cartItems[product.id]}</p>
+                  <p>
+                    Subtotal: Rs{" "}
+                    {(product.price * cartItems[product.id]).toFixed(2)}
+                  </p>
+                </div>
+              ))}
             </div>
             <div>
               <h3>Subtotal</h3>
-              <p>Rs {}</p>
-              <p>Rs {} </p>
-              <h3>Rs. {}</h3>
+              <p>Rs {getTotalCartAmount().toFixed(2)}</p>
+              <h3>Total</h3>
+              <p>Rs {getTotalCartAmount().toFixed(2)}</p>
             </div>
           </div>
           <h5>Direct Bank Transfer</h5>
@@ -96,18 +101,28 @@ const Checkout: React.FC = () => {
           <form action="">
             <input
               type="radio"
-              name=""
-              id=""
-              placeholder="Direct Bank Transfer"
+              name="paymentMethod"
+              id="directBankTransfer"
+              value="Direct Bank Transfer"
             />
-            <input type="radio" name="Cash On Delivery" id="" />
+            <label htmlFor="directBankTransfer">Direct Bank Transfer</label>
+            <br />
+            <input
+              type="radio"
+              name="paymentMethod"
+              id="cashOnDelivery"
+              value="Cash On Delivery"
+            />
+            <label htmlFor="cashOnDelivery">Cash On Delivery</label>
 
             <p>
               Your personal data will be used to support your experience
               throughout this website, to manage access to your account, and for
               other purposes described in our privacy policy.
             </p>
-            <button>Place Order</button>
+            <Link to="/">
+              <button className="orderBtn">Place Order</button>
+            </Link>
           </form>
         </div>
       </div>

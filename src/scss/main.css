@@ -4,44 +4,6 @@ body {
   padding: 0;
 }
 
-nav {
-  position: fixed;
-  top: 0;
-  background: white;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  gap: 5rem;
-}
-
-.navFlex {
-  display: flex;
-  gap: 5rem;
-}
-
-ul {
-  display: flex;
-  justify-content: space-between;
-  gap: 60px;
-}
-
-nav ul li {
-  list-style: none;
-}
-
-#searchInput {
-  width: 120px;
-  padding: 10px;
-  border: 1px solid black;
-  border-radius: 10px;
-}
-
-.searchResults {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
 .hero {
   text-align: center;
   margin-top: 50px;
@@ -54,15 +16,6 @@ nav ul li {
   width: 100vw;
   height: 65vh;
   background-repeat: inherit;
-}
-
-.navlinks {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.icons {
-  width: 0%;
 }
 
 .heroTexts {
@@ -142,10 +95,6 @@ nav ul li {
 
 .footerParagraph {
   padding: 40px;
-}
-
-.navIcons {
-  width: 15px;
 }
 
 .emailLinkFlex {

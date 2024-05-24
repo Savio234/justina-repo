@@ -1,29 +1,29 @@
-import React, { useEffect} from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, Link } from "react-router-dom"; // Import Link
 import staricon from "../assets/staricon.png";
 import halfstar from "../assets/halfstar.png";
 import facebook from "../assets/facebook.png";
 import linkedin from "../assets/linkedin.png";
 import twitter from "../assets/twitter.png";
 import { Carousel } from "react-responsive-carousel";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { selectedProduct } from "../redux/actions/productActions";
+import { ShopContext } from "../context/ShopContext";
 
 const ProductDetail: React.FC = () => {
-  const product = useSelector((state: any) => state.product.product);
   const { productId } = useParams<{ productId: string }>();
   const dispatch = useDispatch();
+  const [productData, setProductData] = useState<any>(null);
+  const context = useContext(ShopContext);
 
-console.log(product)
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(
+        const response = await fetch(
           `https://dummyjson.com/products/${productId}`
         );
-        const data = response.data;
-        console.log("Fetched product data:", data);
+        const data = await response.json();
+        setProductData(data);
         dispatch(selectedProduct(data));
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -33,44 +33,72 @@ console.log(product)
     fetchProduct();
   }, [productId, dispatch]);
 
-  console.log("Product from Redux state:", product); 
-
-  if (!product) {
+  if (!productData) {
     return <div>Loading...</div>;
   }
 
+  const handleAddToCart = () => {
+    if (context) {
+      context.addToCart(productData.id);
+    } else {
+      console.error("ShopContext is not available");
+    }
+  };
+
+  const handleIncrement = () => {
+    if (context) {
+      context.addToCart(productData.id);
+    } else {
+      console.error("ShopContext is not available");
+    }
+  };
+
+  const handleDecrement = () => {
+    if (context) {
+      context.removeFromCart(productData.id);
+    } else {
+      console.error("ShopContext is not available");
+    }
+  };
+
+  const cartQuantity = context?.cartItems[productData.id] || 0;
+
   return (
     <div className="sofaDescription">
-      {product.images && (
-        <div className="sofaCollections">
-          <Carousel className="carousel">
-            {product.images.map((image: string, id: number) => (
-              <img
-                key={id}
-                src={image}
-                alt={`Product ${id}`}
-                className="outdoorSofa"
-              />
-            ))}
-          </Carousel>
-        </div>
-      )}
+      <div className="sofaCollections">
+        <Carousel className="carousel">
+          {productData?.images?.map((image: string, id: number) => (
+            <img
+              key={id}
+              src={image}
+              alt={`productData ${id}`}
+              className="outdoorSofa"
+            />
+          ))}
+        </Carousel>
+      </div>
       <div className="singleImage">
-        <img src={product.thumbnail} alt={product.title} id="asgardSofa" />
+        <img
+          src={productData?.thumbnail}
+          alt={productData?.title}
+          id="asgardSofa"
+        />
       </div>
       <div>
-        <p className="asgaardHeader">{product.title}</p>
-        <p className="sofaPrice">Rs {product.price.toFixed(2)}</p>
+        <p className="asgaardHeader">{productData?.title}</p>
+        <p className="sofaPrice">Rs {productData?.price.toFixed(2)}</p>
         <div className="starIcons">
-          {Array.from({ length: Math.floor(product.rating) }, (_, id) => (
+          {Array.from({ length: Math.floor(productData?.rating) }, (_, id) => (
             <img key={id} src={staricon} alt="Star" />
           ))}
-          {product.rating % 1 !== 0 && (
+          {productData?.rating % 1 !== 0 && (
             <img src={halfstar} alt="Half Star" id="halfstar" />
           )}
-          <span className="custReview">{product.rating} Customer Reviews</span>
+          <span className="custReview">
+            {productData?.rating} Customer Reviews
+          </span>
         </div>
-        <p>{product.description}</p>
+        <p>{productData?.description}</p>
         <p>Size</p>
         <div className="sizes">
           <button className="sizesBtn">L</button>
@@ -85,20 +113,31 @@ console.log(product)
         </div>
         <div className="addCartItems">
           <div className="addItems">
-            <button className="addItemsCount">
-              <span>-</span> <span>1</span> <span>+</span>
+            <button className="addItemsCount" onClick={handleDecrement}>
+              <span>-</span>
+            </button>
+            <span>{cartQuantity}</span>
+            <button className="addItemsCount" onClick={handleIncrement}>
+              <span>+</span>
             </button>
           </div>
           <div>
-            <button className="addToCartBtn">Add to Cart</button>
+            <button className="addToCartBtn" onClick={handleAddToCart}>
+              Add to Cart
+            </button>
           </div>
         </div>
         <div>
+          <Link to="/cart">
+            <button className="checkoutBtn">Checkout</button>
+          </Link>
+        </div>
+        <div>
           <p>
-            SKU <span>: {product.id}</span>
+            SKU <span>: {productData?.id}</span>
           </p>
           <p>
-            Category <span>: {product.category}</span>
+            Category <span>: {productData?.category}</span>
           </p>
           <p className="socialIcons">
             Share :
