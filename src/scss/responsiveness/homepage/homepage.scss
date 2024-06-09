@@ -55,20 +55,21 @@ $b-none: none;
 $b-bottom: solid 3px black;
 
 
+
 @media (max-width: 480px) {
 .hero {
-        text-align: $text-center;
-        margin-top: $m-top;
-        padding-top: $p-top;
-        padding-bottom: $p-bottom;
+        text-align: center;
+        margin-top: 50px;
+        padding-top: 80px;
+        padding-bottom: 80px;
         width: 100%;
     }
-
+    
     .herobg {
         background-image: $herobg;
         width: 100%;
         height: 100%;
-        background-repeat: $background-repeat;
+        background-repeat: inherit;
 
     }
     //all products section
@@ -89,7 +90,21 @@ $b-bottom: solid 3px black;
                     height: 100%;
         
                 }
+                .productTitle{
+                    font-size: 23px;
+                    width: 80%;
+        
+                }
+            .productPrice{
+                font-size: 20px;
+            }
+
+.productdiv:hover {
+    transform: scale(1.05);
+    background-color: #f4f0f0;
+    border-radius: 10px;
 }
+        }
 @media (max-width: 768px) {
 
     .herobg {
@@ -99,6 +114,12 @@ $b-bottom: solid 3px black;
             background-repeat: $background-repeat;
     
         }
+
+.productdiv:hover {
+    transform: scale(1.05);
+    background-color: #f4f0f0;
+    border-radius: 10px;
+}
    
 }
 @media (max-width: 1024px) {
@@ -110,6 +131,12 @@ $b-bottom: solid 3px black;
             background-repeat: $background-repeat;
     
         }
+
+.productdiv:hover {
+    transform: scale(1.05);
+    background-color: #f4f0f0;
+    border-radius: 10px;
+}
    
 }
 @media (max-width: 1200px) {
@@ -121,5 +148,11 @@ $b-bottom: solid 3px black;
             background-repeat: $background-repeat;
     
         }
+
+.productdiv:hover {
+    transform: scale(1.05);
+    background-color: #f4f0f0;
+    border-radius: 10px;
+}
    
 }

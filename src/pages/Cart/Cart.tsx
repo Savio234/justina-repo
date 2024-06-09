@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 
-import deleteicon from "../assets/deleteicon.png";
-import { ShopContext } from "../context/ShopContext";
+import deleteicon from "../../assets/deleteicon.png";
+import { ShopContext } from "../../context/ShopContext";
 import { Link } from "react-router-dom";
 
 const Carts: React.FC = () => {
   const context = useContext(ShopContext);
-  
 
   if (!context) {
     // Handle the case where context is undefined
@@ -14,31 +13,33 @@ const Carts: React.FC = () => {
   }
 
   const { getTotalCartAmount, cartItems, productData } = context;
+  console.log(productData);
 
   const cartProducts =
     productData?.filter((product) => cartItems[product.id] > 0) || [];
+  console.log(cartProducts.length);
 
   return (
     <>
       <div className="cartFlex">
         <div>
-          <div className="cartHeader">
+          <th className="cartHeader">
             <p className="cartHeaderText">Product</p>
             <p className="cartHeaderText">Price</p>
             <p className="cartHeaderText">Quantity</p>
             <p className="cartHeaderText">Subtotal</p>
-          </div>
+          </th>
           {cartProducts.map((product) => (
-            <div className="productsDisplay" key={product.id}>
-              <div className="productFlex">
-                <div className="cartImageDiv divPercentage">
+            <tr className="productsDisplay" key={product.id}>
+              <div className="productFlex divPercentage">
+                <div className="cartImageDiv">
                   <img
                     src={product.thumbnail}
                     alt={product.title}
                     id="cartImage"
                   />
                 </div>
-                <div className="divPercentage">
+                <div className="">
                   <p>{product.title}</p>
                 </div>
               </div>
@@ -55,22 +56,24 @@ const Carts: React.FC = () => {
                 <img
                   src={deleteicon}
                   alt="delete icon"
-                  onClick={() => context.removeFromCart(product.id)}
+                  onClick={() => context.deleteFromCart(product.id)}
                 />
               </div>
-            </div>
+            </tr>
           ))}
         </div>
         <div className="cartTotalsDiv">
-          <h2 className="cartTotalsText">Cart Totals</h2>
-          <div className="cartTotals">
-            <p>Subtotal</p>
-            <p>Rs {getTotalCartAmount().toFixed(2)}</p>
-          </div>
-          <div className="cartTotals">
-            <p>Total</p>
-            <p className="totalCartAmt">Rs {getTotalCartAmount().toFixed(2)}</p>
-          </div>
+          <th className="cartTotalsText">Cart Totals</th>
+          <tr className="cartTotals">
+            <p className="cartPercentage">Subtotal</p>
+            <p className="cartPercentage">
+              Rs {getTotalCartAmount().toFixed(2)}
+            </p>
+          </tr>
+          <tr className="cartTotals">
+            <p className="cartPercentage">Total</p>
+            <p className="totalCartAmt cartPercentage">Rs {getTotalCartAmount().toFixed(2)}</p>
+          </tr>
           <Link to="/checkout">
             <button className="checkoutBtn">Checkout</button>
           </Link>

@@ -97,20 +97,25 @@ $text-underline: underline;
 .colorsBtn1, 
 .colorsBtn2,
 .colorsBtn3{
-    border-radius: $b-radius;
+    border-radius: 100%;
+    transform: scaleY(1.5);
 }
 .colorsBtn{
     display: $d-flex;
     gap: $gap2;
     margin-bottom: $m-bottom;
 }
-.addItems{
-    display: $d-flex;
+.addItems {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    /* margin-bottom: -1px; */
 }
 .addCartItems{
     display: $d-flex;
     align-items: $align-center;
     gap: $gap2;
+    margin-bottom: 30px;
 }
 .addItemsCount{
     display: $d-flex;

@@ -6,8 +6,8 @@ interface SearchProps {
 }
 
 const Search: React.FC<SearchProps> = ({ onSearch }) => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const { setSearchResults } = useContext(ShopContext); // Added this line
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const { setSearchResults }:any = useContext(ShopContext); // Added this line
 
  if (!setSearchResults) {
    // Added this line

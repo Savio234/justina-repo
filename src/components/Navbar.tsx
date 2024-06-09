@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
   if (!context) {
     throw new Error("Navbar must be used within a ShopContextProvider");
   }
-  const { cartItems, searchResults, setSearchResults } = context;
+  const { cartItems, productData, setSearchResults } = context;
 
   const handleSearchIconClick = () => {
     setIsSearchClicked(!isSearchClicked);
@@ -58,7 +58,12 @@ const Navbar: React.FC = () => {
   const cartQuantity = Object.values(cartItems).reduce(
     (acc, quantity) => acc + quantity,
     0
+    
   );
+  
+  const cartProducts =
+    productData?.filter((product) => cartItems[product.id] > 0) || [];
+  console.log(cartProducts.length);
 
   const handleSearch = (query: string) => {
     // Perform the search and update context
@@ -113,27 +118,13 @@ const Navbar: React.FC = () => {
                     <img src={Vector4} alt="Cart-icon" className="navIcons" />
                   </Link>
                   {cartQuantity > 0 && (
-                    <CartCounter>{cartQuantity}</CartCounter>
+                    <CartCounter>{cartProducts.length}</CartCounter>
                   )}
                 </CartIconContainer>
               </div>
             </div>
           </nav>
         </header>
-      </div>
-      <div className="searchResults">
-        {searchResults &&
-          searchResults.map((product, index) => (
-            <div key={index}>
-              <img
-                src={product.thumbnail}
-                alt={product.title}
-                className="productImage"
-              />
-              <div>{product.title}</div>
-              <div>Rs. {product.price}</div>
-            </div>
-          ))}
       </div>
     </>
   );

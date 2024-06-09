@@ -133,6 +133,10 @@ nav ul li {
         .icons {
             display: flex;
             font-size: 1.1rem;
+            margin-left: -100px;
+        }
+        .logo4{
+            cursor: pointer;
         }
     
         .navbar-container {
@@ -178,6 +182,10 @@ nav ul li {
 
     .navDisplay {
         display: block;
+    }
+    .icons{
+        margin-left: -50px;
+        
     }
 }
 

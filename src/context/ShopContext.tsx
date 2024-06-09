@@ -5,18 +5,20 @@ interface Product {
   title: string;
   description: string;
   price: number;
-  thumbnail: string; 
+  thumbnail: string;
 }
 
-interface ShopContextValue {
+export interface ShopContextValue {
   productData: Product[] | null;
   searchResults: Product[] | null;
   cartItems: { [key: number]: number };
   addToCart: (productId: number) => void;
   removeFromCart: (productId: number) => void;
+  deleteFromCart: (productId: number) => void;
   getDefaultCart: () => { [key: number]: number };
   getTotalCartAmount: () => number;
   setSearchResults: (results: Product[] | null) => void;
+  setCartItems: React.Dispatch<React.SetStateAction<{ [key: number]: number }>>;
 }
 
 export const ShopContext = createContext<ShopContextValue | undefined>(
@@ -27,7 +29,7 @@ const ShopContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [productData, setProductData] = useState<Product[] | null>(null);
-  const [searchResults, setSearchResults] = useState<Product[] | null>(null); 
+  const [searchResults, setSearchResults] = useState<Product[] | null>(null);
   const [cartItems, setCartItems] = useState<{ [key: number]: number }>({});
 
   useEffect(() => {
@@ -44,6 +46,19 @@ const ShopContextProvider: React.FC<{ children: ReactNode }> = ({
     fetchProduct();
   }, []);
 
+  useEffect(() => {
+    // Load cart items from localStorage on mount
+    const savedCartItems = localStorage.getItem("cartItems");
+    if (savedCartItems) {
+      setCartItems(JSON.parse(savedCartItems));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save cart items to localStorage whenever they change
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
   const getDefaultCart = () => {
     let cart: { [key: number]: number } = {};
     if (productData) {
@@ -55,7 +70,7 @@ const ShopContextProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   useEffect(() => {
-    if (productData) {
+    if (productData && Object.keys(cartItems).length === 0) {
       setCartItems(getDefaultCart());
     }
   }, [productData]);
@@ -72,6 +87,13 @@ const ShopContextProvider: React.FC<{ children: ReactNode }> = ({
       ...prevCart,
       [productId]: Math.max((prevCart[productId] || 0) - 1, 0),
     }));
+  };
+
+  const deleteFromCart = (productId: number) => {
+    setCartItems((prevCart) => {
+      const { [productId]: _, ...updatedCart } = prevCart;
+      return updatedCart;
+    });
   };
 
   const getTotalCartAmount = () => {
@@ -92,6 +114,8 @@ const ShopContextProvider: React.FC<{ children: ReactNode }> = ({
     getDefaultCart,
     getTotalCartAmount,
     setSearchResults,
+    setCartItems,
+    deleteFromCart,
   };
 
   return (

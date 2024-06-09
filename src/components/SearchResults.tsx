@@ -4,7 +4,7 @@ import { ShopContext } from "../context/ShopContext";
 
 const SearchResults: React.FC = () => {
   const { query } = useParams<{ query: string }>();
-  const { searchResults, setSearchResults } = useContext(ShopContext);
+  const { searchResults, setSearchResults }: any = useContext(ShopContext);
 
   useEffect(() => {
     if (query) {
@@ -16,14 +16,16 @@ const SearchResults: React.FC = () => {
   }, [query, setSearchResults]);
 
   return (
-    <div>
+    <div id="allProducts">
       {searchResults ? (
         searchResults.map((product: any) => (
-          <Link to="/products/:productId">
+          <Link to={`/products/${product.id}`}>
             <div key={product.id}>
               <img src={product.thumbnail} alt={product.title} />
-              <div>{product.title}</div>
-              <div>Rs. {product.price}</div>
+              <div id="productLinks">
+                <div>{product.title}</div>
+                <div>Rs. {product.price}</div>
+              </div>
             </div>
           </Link>
         ))

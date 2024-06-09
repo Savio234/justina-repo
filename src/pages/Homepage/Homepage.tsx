@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { setProducts } from "../redux/actions/productActions";
+import { setProducts } from "../../redux/actions/productActions";
+import SearchResults from "../../components/SearchResults";
+import { ShopContext } from "../../context/ShopContext";
+
 //import { productReducer } from "../redux/reducers/productReducer";
 // import ProductDetail from "./Products";
 
@@ -11,10 +14,10 @@ const Homepage: React.FC = () => {
   const [productsPerPage] = useState<number>(16);
   const [displayedProducts, setDisplayedProducts] = useState<any[]>([]);
   const [allProducts, setAllProducts] = useState<any[]>([]);
+  const { searchResults }: any = useContext(ShopContext);
   const api = "https://dummyjson.com/products";
-  const products = useSelector((state) => state)
+  const products = useSelector((state) => state);
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     fetch(api)
@@ -27,7 +30,7 @@ const Homepage: React.FC = () => {
         );
 
         console.log(data);
-        dispatch(setProducts(data))
+        dispatch(setProducts(data));
         fetchedProducts = Array.from(
           { length: repetitionsNeeded },
           () => fetchedProducts
@@ -36,7 +39,7 @@ const Homepage: React.FC = () => {
         setTotalPages(Math.ceil(fetchedProducts.length / productsPerPage));
         setDisplayedProducts(fetchedProducts.slice(0, productsPerPage));
       });
-    console.log("Products: ", products)
+    console.log("Products: ", products);
   }, []);
 
   const handleNextPage = () => {
@@ -75,28 +78,33 @@ const Homepage: React.FC = () => {
     setDisplayedProducts(pageProducts);
   };
 
+  
   return (
     <>
       <main>
-        <div className="products" id="allProducts">
-          {displayedProducts.map((product, index) => (
-            <div className="productdiv" key={index}>
-              <Link to={`/products/${product.id}`}>
-                <div className="img-container">
-                  <img
-                    src={product.images[0]}
-                    alt={product.title}
-                    className="product-img"
-                  />
-                </div>
-                <div id="productLinks">
-                  <h4>{product.title}</h4>
-                  <h3>Rs. {product.price}</h3>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
+        {!searchResults ? (
+          <div className="products" id="allProducts">
+            {displayedProducts.map((product, index) => (
+              <div className="productdiv" key={index}>
+                <Link to={`/products/${product.id}`}>
+                  <div className="img-container">
+                    <img
+                      src={product.images[0]}
+                      alt={product.title}
+                      className="product-img"
+                    />
+                  </div>
+                  <div id="productLinks">
+                    <h4 className="productTitle">{product.title}</h4>
+                    <h3 className="productPrice">Rs. {product.price}</h3>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <SearchResults />
+        )}
       </main>
 
       <div className="numbers">
@@ -112,10 +120,18 @@ const Homepage: React.FC = () => {
         {/* <button className="numberDesign" onClick={() => handlePageClick(3)}>
           3
         </button> */}
-        <button className="numberDesign" onClick={handlePreviousPage}>
+        <button
+          className="numberDesign"
+          disabled={activePage === 1}
+          onClick={handlePreviousPage}
+        >
           Previous
         </button>
-        <button className="numberDesign" onClick={handleNextPage}>
+        <button
+          className="numberDesign"
+          disabled={activePage === totalPages}
+          onClick={handleNextPage}
+        >
           Next
         </button>
       </div>

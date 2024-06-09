@@ -53,10 +53,13 @@ $underline: underline;
 $l-height: 30px;
 $b-none: none;
 $b-bottom: solid 3px black;
+
+
 body{
     background: $white;
     margin: $margin;
     padding: $padding-body;
+    overflow-x: hidden;
 }
 
 
@@ -103,6 +106,7 @@ flex-wrap: $f-wrap;
     background-color: #f4f0f0;
     border-radius:10px;
 }
+
 // .products1{
 //     display: $d-flex;
 //     // flex-direction: $f-direction;
