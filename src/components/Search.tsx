@@ -7,12 +7,12 @@ interface SearchProps {
 
 const Search: React.FC<SearchProps> = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const { setSearchResults }:any = useContext(ShopContext); // Added this line
+  const { setSearchResults }: any = useContext(ShopContext); 
 
- if (!setSearchResults) {
-   // Added this line
-   throw new Error("Search must be used within a ShopContextProvider"); // Added this line
- }
+  if (!setSearchResults) {
+   
+    throw new Error("Search must be used within a ShopContextProvider");  
+  }
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

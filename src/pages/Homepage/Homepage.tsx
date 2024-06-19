@@ -78,7 +78,6 @@ const Homepage: React.FC = () => {
     setDisplayedProducts(pageProducts);
   };
 
-  
   return (
     <>
       <main>

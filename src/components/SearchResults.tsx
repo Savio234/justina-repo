@@ -26,6 +26,8 @@ const SearchResults: React.FC = () => {
                 <div>{product.title}</div>
                 <div>Rs. {product.price}</div>
               </div>
+
+            
             </div>
           </Link>
         ))

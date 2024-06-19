@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import staricon from "../../assets/staricon.png";
 import halfstar from "../../assets/halfstar.png";
 import facebook from "../../assets/facebook.png";
@@ -9,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { selectedProduct } from "../../redux/actions/productActions";
 import { ShopContext } from "../../context/ShopContext";
 import { HiChevronRight } from "react-icons/hi2";
+
 
 const ProductDetail: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
@@ -36,14 +39,6 @@ const ProductDetail: React.FC = () => {
   if (!productData) {
     return <div>Loading...</div>;
   }
-
-  // const handleAddToCart = () => {
-  //   if (context) {
-  //     context.addToCart(productData.id);
-  //   } else {
-  //     console.error("ShopContext is not available");
-  //   }
-  // };
 
   const handleIncrement = () => {
     if (context) {
@@ -93,13 +88,15 @@ const ProductDetail: React.FC = () => {
           ))}
         </div>
         <div className="singleImage">
-          <img
-            src={productData?.thumbnail}
-            alt={productData?.title}
-            id="asgardSofa"
-          />
+          <Carousel showArrows={false} showThumbs={false} className="carousel">
+            {productData?.images?.map((image: string, id: number) => (
+              <div key={id}>
+                <img src={image} alt={`productData ${id}`} />
+              </div>
+            ))}
+          </Carousel>
         </div>
-        <div>
+        <div className="productDetails">
           <p className="asgaardHeader">{productData?.title}</p>
           <p className="sofaPrice">Rs {productData?.price.toFixed(2)}</p>
           <div className="starIcons">
@@ -142,11 +139,6 @@ const ProductDetail: React.FC = () => {
                 </Link>
               </div>
             </div>
-            {/* <div>
-              <button className="addToCartBtn" onClick={handleAddToCart}>
-                Add to Cart
-              </button>
-            </div> */}
           </div>
 
           <div>

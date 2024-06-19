@@ -17,7 +17,6 @@ import "./pages/Checkout/checkout-styles/checkout.scss";
 import "./scss/responsiveness/homepage/homepage.scss";
 import "./scss/responsiveness/guarantee/guarantee.scss";
 import "./scss/responsiveness/footer/footer.scss";
-import "./scss/responsiveness/productpage/product.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./scss/responsiveness/checkoutPage/checkout.scss";
 import "./scss/navbar/navbar.scss";
