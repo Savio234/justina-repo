@@ -10,13 +10,16 @@ import twitter from "../../assets/twitter.png";
 import { useDispatch } from "react-redux";
 import { selectedProduct } from "../../redux/actions/productActions";
 import { ShopContext } from "../../context/ShopContext";
-import { HiChevronRight } from "react-icons/hi2";
-
+import { HiChevronRight } from "react-icons/hi";
+import "./products.scss";
 
 const ProductDetail: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
   const dispatch = useDispatch();
   const [productData, setProductData] = useState<any>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const context = useContext(ShopContext);
 
   useEffect(() => {
@@ -37,44 +40,52 @@ const ProductDetail: React.FC = () => {
   }, [productId, dispatch]);
 
   if (!productData) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
+
+
   const handleIncrement = () => {
-    if (context) {
-      context.addToCart(productData.id);
-    } else {
-      console.error("ShopContext is not available");
-    }
+    setQuantity((prevQuantity) => prevQuantity + 1);
   };
 
   const handleDecrement = () => {
+    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
+  };
+
+  const handleAddToCart = () => {
     if (context) {
-      context.removeFromCart(productData.id);
+      context.addToCart(productData.id, quantity);
+      setQuantity(1); // Reset quantity after adding
     } else {
       console.error("ShopContext is not available");
     }
   };
 
-  const cartQuantity = context?.cartItems[productData.id] || 0;
+  const handleImageClick = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  const handleColorSelect = (color: string) => {
+    setSelectedColor(color);
+  };
 
   return (
     <>
       <div className="homeLink">
-        <a href="">
+        <Link to="/">
           Home{" "}
           <span className="chevronRight">
             <HiChevronRight />
           </span>
-        </a>
-
-        <a href="" className="chevronBorder">
+        </Link>
+        <Link to="/shop" className="chevronBorder">
           Shop{" "}
           <span className="chevronRight">
             <HiChevronRight />
           </span>
-        </a>
-        <p>{productData.title}</p>
+        </Link>
+        <p className="productPageTitle">{productData.title}</p>
       </div>
       <div className="sofaDescription">
         <div className="sofaCollections">
@@ -84,68 +95,91 @@ const ProductDetail: React.FC = () => {
               src={image}
               alt={`productData ${id}`}
               className="outdoorSofa"
+              onClick={() => handleImageClick(id)}
             />
           ))}
         </div>
         <div className="singleImage">
-          <Carousel showArrows={false} showThumbs={false} className="carousel">
+          <Carousel
+            showArrows={false}
+            selectedItem={currentSlide}
+            onChange={(index) => setCurrentSlide(index)}
+          >
             {productData?.images?.map((image: string, id: number) => (
-              <div key={id}>
+              <div key={id} className="carouselImages">
                 <img src={image} alt={`productData ${id}`} />
               </div>
             ))}
           </Carousel>
         </div>
         <div className="productDetails">
-          <p className="asgaardHeader">{productData?.title}</p>
-          <p className="sofaPrice">Rs {productData?.price.toFixed(2)}</p>
+          <p className="productTitleHeader">{productData?.title}</p>
+          <p className="productPrice">Rs {productData?.price.toFixed(2)}</p>
           <div className="starIcons">
             {Array.from(
               { length: Math.floor(productData?.rating) },
               (_, id) => (
-                <img key={id} src={staricon} alt="Star" />
+                <img key={id} src={staricon} alt="Star" className="star" />
               )
             )}
             {productData?.rating % 1 !== 0 && (
-              <img src={halfstar} alt="Half Star" id="halfstar" />
+              <img
+                src={halfstar}
+                alt="Half Star"
+                id="halfstar"
+                className="star"
+              />
             )}
             <span className="custReview">
               {productData?.rating} Customer Reviews
             </span>
           </div>
-          <p>{productData?.description}</p>
-          <p>Size</p>
+          <p className="productDescription">{productData?.description}</p>
+          <p className="productSize">Size</p>
           <div className="sizes">
             <button className="sizesBtn">L</button>
             <button className="sizesBtn">XL</button>
             <button className="sizesBtn">XS</button>
           </div>
-          <p>Color</p>
+          <p className="productColor">Color</p>
           <div className="colorsBtn">
-            <button className="colorsBtn1"></button>
-            <button className="colorsBtn2"></button>
-            <button className="colorsBtn3"></button>
+            <button
+              className="colorsBtn1"
+              onClick={() => handleColorSelect("Purple")}
+            ></button>
+            <button
+              className="colorsBtn2"
+              onClick={() => handleColorSelect("Black")}
+            ></button>
+            <button
+              className="colorsBtn3"
+              onClick={() => handleColorSelect("Gold")}
+            ></button>
           </div>
+          {selectedColor && (
+            <p className="selectedColorText">Selected Color: {selectedColor}</p>
+          )}
           <div className="addCartItems">
             <div className="addItems">
               <button className="addItemsCount">
                 <span onClick={handleDecrement}>-</span>
-                <span>{cartQuantity}</span>
+                <span>{quantity}</span>
                 <span onClick={handleIncrement}>+</span>
               </button>
               <div>
-                <Link to="/cart">
-                  <button className="addToCartBtn">Add to Cart</button>
-                </Link>
+                <div>
+                  <button className="addToCartBtn" onClick={handleAddToCart}>
+                    Add to Cart
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-
           <div>
-            <p>
-              SKU <span>: {productData?.id}</span>
+            <p className="productSKU">
+              SKU <span>: {productData?.sku}</span>
             </p>
-            <p>
+            <p className="productCategory">
               Category <span>: {productData?.category}</span>
             </p>
             <p className="socialIcons">

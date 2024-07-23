@@ -1,28 +1,53 @@
-import React, { useContext } from "react";
-
+import React, { useContext, useEffect, useState } from "react";
 import deleteicon from "../../assets/deleteicon.png";
 import { ShopContext } from "../../context/ShopContext";
 import { Link } from "react-router-dom";
+import "./cart.scss";
 
 const Carts: React.FC = () => {
   const context = useContext(ShopContext);
+  const [cartProduct, setCartProduct] = useState([]);
 
   if (!context) {
-    // Handle the case where context is undefined
     return <div>Loading...</div>;
   }
 
-  const { getTotalCartAmount, cartItems, productData } = context;
-  console.log(productData);
+  const {
+    getTotalCartAmount,
+    cartItems,
+    productData,
+    addToCart,
+    removeFromCart,
+    deleteFromCart,
+    setCartItems, // Assume this is a new function added to ShopContext to set cart items
+  } = context;
 
   const cartProducts =
     productData?.filter((product) => cartItems[product.id] > 0) || [];
-  console.log(cartProducts.length);
+
+  console.log(cartProducts?.length, productData);
+
+  useEffect(() => {
+    // Load cart items from localStorage on mount
+    const savedCartItems = localStorage.getItem("cartItems");
+    if (savedCartItems !== null) {
+      setCartItems(JSON.parse(savedCartItems));
+    }
+  }, [setCartItems]);
+
+  useEffect(() => {
+    // Save cart items to localStorage whenever they change
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
       <div className="cartFlex">
-        <div>
+        <div className="cartItemsContainer">
           <th className="cartHeader">
             <p className="cartHeaderText">Product</p>
             <p className="cartHeaderText">Price</p>
@@ -40,23 +65,41 @@ const Carts: React.FC = () => {
                   />
                 </div>
                 <div className="">
-                  <p>{product.title}</p>
+                  <p className="cartProductTitle">{product.title}</p>
                 </div>
               </div>
               <div className="divPercentage">
-                <p>Rs {product.price.toFixed(2)}</p>
+                <p className="cartProductPrice">
+                  Rs {product.price.toFixed(2)}
+                </p>
               </div>
               <div className="divPercentage">
-                <p>{cartItems[product.id]}</p>
+                <div className="quantityControl divPercentage">
+                  <button
+                    className="cartBtn"
+                    onClick={() => removeFromCart(product.id)}
+                  >
+                    -
+                  </button>
+                  <span>{cartItems[product.id]}</span>
+                  <button
+                    className="cartBtn"
+                    onClick={() => addToCart(product.id, 1)}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
               <div className="divPercentage">
-                <p>Rs {(product.price * cartItems[product.id]).toFixed(2)}</p>
+                <p className="cartProductTotal">
+                  Rs {(product.price * cartItems[product.id]).toFixed(2)}
+                </p>
               </div>
               <div className="divPercentage">
                 <img
                   src={deleteicon}
                   alt="delete icon"
-                  onClick={() => context.deleteFromCart(product.id)}
+                  onClick={() => deleteFromCart(product.id)}
                 />
               </div>
             </tr>
@@ -72,7 +115,9 @@ const Carts: React.FC = () => {
           </tr>
           <tr className="cartTotals">
             <p className="cartPercentage">Total</p>
-            <p className="totalCartAmt cartPercentage">Rs {getTotalCartAmount().toFixed(2)}</p>
+            <p className="totalCartAmt cartPercentage">
+              Rs {getTotalCartAmount().toFixed(2)}
+            </p>
           </tr>
           <Link to="/checkout">
             <button className="checkoutBtn">Checkout</button>

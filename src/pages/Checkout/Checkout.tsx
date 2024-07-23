@@ -1,22 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect} from "react";
 import { ShopContext } from "../../context/ShopContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import "./checkout.scss";
+import Select from "react-select";
+import { InputMask } from '@react-input/mask';
 
-// Define the validation schema using Yup
+
+
 const validationSchema = Yup.object({
   firstName: Yup.string().required("First Name is required"),
   lastName: Yup.string().required("Last Name is required"),
   streetAddress: Yup.string().required("Street Address is required"),
   city: Yup.string().required("City is required"),
   zipCode: Yup.string().required("Zip Code is required"),
-  phone: Yup.string().required("Phone number is required"),
   email: Yup.string()
     .email("Invalid email address")
     .required("Email address is required"),
+  
 });
+
+
 
 const Checkout: React.FC = () => {
   const context = useContext(ShopContext);
@@ -44,9 +50,9 @@ const Checkout: React.FC = () => {
     streetAddress: "",
     city: "",
     zipCode: "",
-    phone: "",
     email: "",
     additionalInfo: "",
+
   };
 
   const handlePlaceOrder = () => {
@@ -56,11 +62,30 @@ const Checkout: React.FC = () => {
     }
 
     notify();
-    setCartItems(getDefaultCart()); // Clear the cart
-    navigate("/"); // Redirect to the homepage
+    setCartItems(getDefaultCart()); 
+    navigate("/"); 
   };
 
   const notify = () => toast.success("Order Placed Successfully");
+
+  const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState<any>({});
+
+   useEffect(() => {
+     fetch(
+       "https://valid.layercode.workers.dev/list/countries?format=select&flags=true&value=code"
+     )
+       .then((response) => response.json())
+       .then((data) => {
+         setCountries(data.countries);
+         setSelectedCountry(data.userSelectValue);
+       });
+   }, []);
+
+   useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
+
 
   return (
     <>
@@ -111,6 +136,22 @@ const Checkout: React.FC = () => {
                     Company Name (Optional)
                   </label>
                   <Field type="text" name="companyName" className="inputs" />
+                  <label htmlFor="companyName" className="labels">
+                    Country/Region
+                  </label>
+                  <Select
+                    options={countries}
+                    value={selectedCountry}
+                    className="countryInput"
+                    onChange={(selectedOption) =>
+                      setSelectedCountry(selectedOption)
+                    }
+                  />
+                  <ErrorMessage
+                    name="country"
+                    component="div"
+                    className="error"
+                  />
                   <label htmlFor="streetAddress" className="labels">
                     Street Address
                   </label>
@@ -137,12 +178,13 @@ const Checkout: React.FC = () => {
                   <label htmlFor="phone" className="labels">
                     Phone
                   </label>
-                  <Field type="tel" name="phone" className="inputs" />
-                  <ErrorMessage
-                    name="phone"
-                    component="div"
-                    className="error"
+                  <InputMask
+                    mask="+234 (___) ___-__-__"
+                    replacement={{ _: /\d/ }}
+                    className="inputs"
+                    type="tel"
                   />
+                  
                   <label htmlFor="email" className="labels">
                     Email address
                   </label>
@@ -163,31 +205,44 @@ const Checkout: React.FC = () => {
                 <Form>
                   <div className="checkoutTotalDiv">
                     <div className="checkoutTotal">
-                      <div>
-                        <h3>Product</h3>
-                        {cartProducts.map((product) => (
-                          <div key={product.id}>
-                            <p>{product.title}</p>
-                            <p>Price: Rs {product.price.toFixed(2)}</p>
-                            <p>Quantity: {cartItems[product.id]}</p>
-                            <p>
-                              Subtotal: Rs{" "}
-                              {(product.price * cartItems[product.id]).toFixed(
-                                2
-                              )}
-                            </p>
-                          </div>
-                        ))}
+                      <div className="checkoutHeaderText">
+                        <h3 className="checkoutProductText">Product</h3>
+                        <h3 className="checkoutProductText">Subtotal</h3>
                       </div>
+
+                      {cartProducts.map((product) => (
+                        <div
+                          key={product.id}
+                          className="checkoutProductTextDiv"
+                        >
+                          <p className="transferText">
+                            {product.title} x {cartItems[product.id]}
+                          </p>
+
+                          <p className="transferText2">
+                            Rs{" "}
+                            {(product.price * cartItems[product.id]).toFixed(2)}
+                          </p>
+                        </div>
+                      ))}
+
                       <div>
-                        <h3>Subtotal</h3>
-                        <p>Rs {getTotalCartAmount().toFixed(2)}</p>
-                        <h3>Total</h3>
-                        <p>Rs {getTotalCartAmount().toFixed(2)}</p>
+                        <div className="checkoutSubtotal">
+                          <p className="checkoutProductText">Subtotal</p>
+                          <p>Rs {getTotalCartAmount().toFixed(2)}</p>
+                        </div>
+                        <div className="checkoutTotals">
+                          <h3>Total</h3>
+                          <p className="cartTotalAmt">
+                            Rs {getTotalCartAmount().toFixed(2)}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                    <h5>Direct Bank Transfer</h5>
-                    <p>
+                    <h3 className="checkoutProductText">
+                      Direct Bank Transfer
+                    </h3>
+                    <p className="transferText">
                       Make your payment directly into our bank account. Please
                       use your order ID as the payment reference. Your order
                       will not be shipped until the funds have cleared in our
@@ -199,8 +254,12 @@ const Checkout: React.FC = () => {
                         name="paymentMethod"
                         id="directBankTransfer"
                         value="Direct Bank Transfer"
+                        defaultChecked
                       />
-                      <label htmlFor="directBankTransfer">
+                      <label
+                        htmlFor="directBankTransfer"
+                        className="transferText"
+                      >
                         Direct Bank Transfer
                       </label>
                       <br />
@@ -210,20 +269,26 @@ const Checkout: React.FC = () => {
                         id="cashOnDelivery"
                         value="Cash On Delivery"
                       />
-                      <label htmlFor="cashOnDelivery">Cash On Delivery</label>
-                      <p>
+
+                      <label htmlFor="cashOnDelivery" className="transferText">
+                        Cash On Delivery
+                      </label>
+
+                      <p className="checkoutText">
                         Your personal data will be used to support your
                         experience throughout this website, to manage access to
                         your account, and for other purposes described in our
-                        privacy policy.
+                        <b> privacy policy.</b>
                       </p>
-                      <button
-                        className="orderBtn"
-                        type="submit"
-                        disabled={isSubmitting}
-                      >
-                        Place Order
-                      </button>
+                      <div className="orderDiv">
+                        <button
+                          className="orderBtn"
+                          type="submit"
+                          disabled={isSubmitting}
+                        >
+                          Place Order
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </Form>

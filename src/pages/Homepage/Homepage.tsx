@@ -2,45 +2,53 @@ import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { setProducts } from "../../redux/actions/productActions";
-import SearchResults from "../../components/SearchResults";
+import SearchResults from "../../components/Search/SearchResults";
 import { ShopContext } from "../../context/ShopContext";
 
-//import { productReducer } from "../redux/reducers/productReducer";
-// import ProductDetail from "./Products";
-
 const Homepage: React.FC = () => {
+  const [screenSize, setScreenSize] = useState<number>(window.innerWidth);
   const [activePage, setActivePage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const [productsPerPage] = useState<number>(16);
+  const [productsPerPage, setProductsPerPage] = useState<number>(16);
   const [displayedProducts, setDisplayedProducts] = useState<any[]>([]);
   const [allProducts, setAllProducts] = useState<any[]>([]);
   const { searchResults }: any = useContext(ShopContext);
   const api = "https://dummyjson.com/products";
-  const products = useSelector((state) => state);
+
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    screenSize >= 768 ? setProductsPerPage(16) : setProductsPerPage(8);
+  }, [screenSize]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   useEffect(() => {
     fetch(api)
       .then((response) => response.json())
       .then((data) => {
-        let fetchedProducts = data.products;
-        // Repeat some products to ensure enough for pagination
-        const repetitionsNeeded = Math.ceil(
-          productsPerPage / fetchedProducts.length
-        );
+        const fetchedProducts = data.products;
+        dispatch(setProducts(fetchedProducts));
 
-        console.log(data);
-        dispatch(setProducts(data));
-        fetchedProducts = Array.from(
-          { length: repetitionsNeeded },
-          () => fetchedProducts
-        ).flat();
         setAllProducts(fetchedProducts);
         setTotalPages(Math.ceil(fetchedProducts.length / productsPerPage));
         setDisplayedProducts(fetchedProducts.slice(0, productsPerPage));
       });
-    console.log("Products: ", products);
-  }, []);
+  }, [productsPerPage, dispatch]);
 
   const handleNextPage = () => {
     if (activePage < totalPages) {
@@ -107,25 +115,23 @@ const Homepage: React.FC = () => {
       </main>
 
       <div className="numbers">
+        {activePage > 1 && (
+          <button className="numberDesign" onClick={handlePreviousPage}>
+            Previous
+          </button>
+        )}
         {[...Array(totalPages).keys()].map((pageNumber) => (
           <button
             key={pageNumber + 1}
-            className="numberDesign"
+            className={`numberDesign1 ${
+              activePage === pageNumber + 1 ? "active" : ""
+            }`}
             onClick={() => handlePageClick(pageNumber + 1)}
           >
             {pageNumber + 1}
           </button>
         ))}
-        {/* <button className="numberDesign" onClick={() => handlePageClick(3)}>
-          3
-        </button> */}
-        <button
-          className="numberDesign"
-          disabled={activePage === 1}
-          onClick={handlePreviousPage}
-        >
-          Previous
-        </button>
+
         <button
           className="numberDesign"
           disabled={activePage === totalPages}
