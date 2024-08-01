@@ -12,7 +12,7 @@ export interface ShopContextValue {
   productData: Product[] | null;
   searchResults: Product[] | null;
   cartItems: { [key: number]: number };
-  cartUpdated: number; // Change to number to keep track of product additions
+  cartUpdated: number;
   addToCart: (productId: number, quantity: number) => void;
   removeFromCart: (productId: number) => void;
   addItem: (productId: number) => void;
@@ -28,15 +28,15 @@ export const ShopContext = createContext<ShopContextValue | undefined>(
   undefined
 );
 
-
-
 const ShopContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [productData, setProductData] = useState<Product[] | null>(null);
   const [searchResults, setSearchResults] = useState<Product[] | null>(null);
-  const [cartItems, setCartItems] = useState<{ [key: number]: number }>({});
-  const [cartUpdated, setCartUpdated] = useState(0); // Initialize with 0
+  const [cartItems, setCartItems] = useState<{ [key: number]: number }>(() =>
+    JSON.parse(localStorage.getItem("cartItems") || "{}")
+  );
+  const [cartUpdated, setCartUpdated] = useState(0);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -53,17 +53,8 @@ const ShopContextProvider: React.FC<{ children: ReactNode }> = ({
   }, []);
 
   useEffect(() => {
-    // Load cart items from localStorage on mount
-    const savedCartItems = localStorage.getItem("productData");
-    if (savedCartItems) {
-      setProductData(JSON.parse(savedCartItems));
-    }
-  }, []);
-
-  useEffect(() => {
-    // Save cart items to localStorage whenever they change
-    localStorage.setItem("productData", JSON.stringify(productData));
-  }, [productData]);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const getDefaultCart = () => {
     let cart: { [key: number]: number } = {};
@@ -95,33 +86,6 @@ const ShopContextProvider: React.FC<{ children: ReactNode }> = ({
       }));
     }
   };
-
-
-// const addToCart = () => {
-// 		const productData = { ...data, cartProductQuantity: 1 };
-
-// 		setCart((prevCart: any[]) => {
-// 			const itemIndex = prevCart.findIndex((item: any) => item.id === data.id);
-// 			if (itemIndex !== -1) {
-// 				// If the item is already in the cart, create a new array with the updated item
-// 				toast.success(One more ${productData.name} has been added to cart);
-// 				return [
-// 					...prevCart.slice(0, itemIndex),
-// 					{
-// 						...prevCart[itemIndex],
-// 						cartProductQuantity: prevCart[itemIndex].cartProductQuantity + 1,
-// 					},
-// 					...prevCart.slice(itemIndex + 1),
-// 				];
-// 			} else {
-// 				// If the item is not in the cart, create a new array with the added item
-// 				toast.success(${productData.name} was added to cart)
-// 				return [...prevCart, productData];
-// 			}
-// 		});
-// 	};
-
-
 
   const removeFromCart = (productId: number) => {
     setCartItems((prevCart) => ({

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { Link } from "react-router-dom";
 import { setProducts } from "../../redux/actions/productActions";
 import SearchResults from "../../components/Search/SearchResults";

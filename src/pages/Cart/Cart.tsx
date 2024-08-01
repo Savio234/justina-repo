@@ -1,15 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import deleteicon from "../../assets/deleteicon.png";
 import { ShopContext } from "../../context/ShopContext";
 import { Link } from "react-router-dom";
 import "./cart.scss";
+import { BeatLoader } from "react-spinners";
+
 
 const Carts: React.FC = () => {
   const context = useContext(ShopContext);
-  const [cartProduct, setCartProduct] = useState([]);
+
 
   if (!context) {
-    return <div>Loading...</div>;
+    return <BeatLoader />;
   }
 
   const {
@@ -18,28 +20,18 @@ const Carts: React.FC = () => {
     productData,
     addToCart,
     removeFromCart,
-    deleteFromCart,
-    setCartItems, // Assume this is a new function added to ShopContext to set cart items
   } = context;
 
-  const cartProducts =
-    productData?.filter((product) => cartItems[product.id] > 0) || [];
+const cartProducts =
+  productData?.filter((product) => cartItems[product.id] > 0) || [];
+console.log(cartProducts.length);
 
-  console.log(cartProducts?.length, productData);
+  // console.log(cartProducts?.length, productData);
+  // console.log(productData)
 
-  useEffect(() => {
-    // Load cart items from localStorage on mount
-    const savedCartItems = localStorage.getItem("cartItems");
-    if (savedCartItems !== null) {
-      setCartItems(JSON.parse(savedCartItems));
-    }
-  }, [setCartItems]);
 
-  useEffect(() => {
-    // Save cart items to localStorage whenever they change
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
 
+//scroll effect to take the page back to top
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -99,7 +91,7 @@ const Carts: React.FC = () => {
                 <img
                   src={deleteicon}
                   alt="delete icon"
-                  onClick={() => deleteFromCart(product.id)}
+                  onClick={() => context.deleteFromCart(product.id)}
                 />
               </div>
             </tr>

@@ -12,9 +12,10 @@ import { selectedProduct } from "../../redux/actions/productActions";
 import { ShopContext } from "../../context/ShopContext";
 import { HiChevronRight } from "react-icons/hi";
 import "./products.scss";
+import { BeatLoader } from "react-spinners";
 
 const ProductDetail: React.FC = () => {
-  const { productId } = useParams<{ productId: string }>();
+const { productId } = useParams<{ productId: string }>();
   const dispatch = useDispatch();
   const [productData, setProductData] = useState<any>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -40,7 +41,7 @@ const ProductDetail: React.FC = () => {
   }, [productId, dispatch]);
 
   if (!productData) {
-    return <div className="loading">Loading...</div>;
+    return <BeatLoader />;
   }
 
 

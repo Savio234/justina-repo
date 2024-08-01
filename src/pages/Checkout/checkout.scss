@@ -148,6 +148,11 @@ $b-bottom: solid 3px black;
 #info{
     margin-top: $m-top;
 }
+.react-tel-input .flag-dropdown .country-list {
+    display: block !important;
+    width: 100%;
+
+}
 .billingForm{
     display: grid;
         justify-content: start;
@@ -199,6 +204,7 @@ $b-bottom: solid 3px black;
     font-size: 1.8rem;
 
 }
+
 .checkoutTotals{
     border-bottom: 1px solid #D9D9D9;
 }
@@ -350,6 +356,20 @@ border: 1px solid hsl(0, 0%, 80%);
     -ms-flex: 1;
     flex: 1;
     font-size: 5rem;
+}
+input.form-control.open.inputs {
+    position: relative;
+    font-size: 14px;
+    letter-spacing: .01rem;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-left: 48px;
+    margin-left: 0;
+    background: #FFFFFF;
+    border: 1px solid #CACACA;
+    border-radius: 5px;
+    line-height: 25px;
+    height: 35px;
 }
 }
 
