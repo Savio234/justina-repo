@@ -1,60 +1,3 @@
-$white: white;
-$d-flex: flex;
-$d-block: block;
-$flex-column: column;
-$d-none: none;
-$margin: 0;
-$margin2: 50px;
-$list-style: none;
-$gap1: 60px;
-$gap2: 20px;
-$gap3: 100px;
-$gap4: 140px;
-$nav-gap: 5rem;
-$padding-body: 0;
-$p-body: 30px;
-$p-20: 8px;
-$p-40: 40px;
-$w-20: 50px;
-$w-15: 15px;
-$f-size: 15px;
-$navposition: fixed;
-$top: 0;
-$space-between: space-between;
-$justify-center: center;
-$justify-flex-end: flex-end;
-$text-center: center;
-$align-center: center;
-$object-fit: cover;
-$background-repeat: inherit;
-$width: 100%;
-$width2: 100vw;
-$width3: 40%;
-$width4: 0%;
-$width5: 25%;
-$width6: 200px;
-$height2: 65vh;
-$height: 30vh;
-$m-left: 100px;
-$m-right: 100px;
-$m-top: 50px;
-$m-top2: 50px;
-$m-bottom: 50px;
-$p-top: 80px;
-$p-bottom: 80px;
-$text-center: center;
-$herobg: url('/src/assets/heroimage.png');
-$f-direction: column;
-$f-wrap: wrap;
-$background-color2: #FAF4F4;
-$background-color: #FFF9E5;
-$background-hover: #FBEBB5;
-$b-ash2: #9F9F9F;
-$underline: underline;
-$l-height: 30px;
-$b-none: none;
-$b-bottom: solid 3px black;
-
 
 .inputs {
     width: 35rem;
@@ -121,7 +64,7 @@ $b-bottom: solid 3px black;
     font-size: 14px;
 }
 .nameInput{
-        width: 15rem;
+        width: 16rem;
         margin-top: 20px;
         padding: 11px;
         border: 1px solid hsl(0, 0%, 80%);
@@ -135,7 +78,7 @@ $b-bottom: solid 3px black;
     display: flex;
 }
 .labels{
-    font-size: $f-size;
+    font-size: 15px;
     margin-top: 15px;
     margin-bottom: 5px;
 }
@@ -146,11 +89,11 @@ $b-bottom: solid 3px black;
     font-size: 15px;
 }
 #info{
-    margin-top: $m-top;
+    margin-top: 50px;
 }
 .react-tel-input .flag-dropdown .country-list {
     display: block !important;
-    width: 100%;
+ 
 
 }
 .billingForm{
@@ -176,11 +119,13 @@ $b-bottom: solid 3px black;
     border: 1px solid black;
     background-color: white;
     width: 22rem;
-    margin-top: 3rem;
+    margin: 3rem 0;
+    color: #000;
  
 }
 .orderBtn:hover{
     border: 1px solid black;
+    color: #000;
 }
 .orderDiv{
     text-align: center;
@@ -208,6 +153,9 @@ $b-bottom: solid 3px black;
 .checkoutTotals{
     border-bottom: 1px solid #D9D9D9;
 }
+
+
+
  .checkoutHeaderText,
  .checkoutProductTextDiv,
  .checkoutSubtotal,
@@ -227,6 +175,23 @@ $b-bottom: solid 3px black;
     -ms-flex: 1;
     flex: 1;
     font-size: 1rem;
+}
+
+.react-tel-input .form-control {
+    position: relative;
+    font-size: 14px;
+    letter-spacing: .01rem;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-left: 48px;
+    margin-left: 0;
+    background: #FFFFFF;
+    border: 1px solid #CACACA;
+    border-radius: 5px;
+    line-height: 25px;
+    height: 35px;
+    width: 315px;
+    outline: none;
 }
 
 @media (max-width: 1200px) {}
@@ -291,7 +256,7 @@ $b-bottom: solid 3px black;
         width: 100%;
         margin-top: 20px;
         padding: 11px;
-border: 1px solid hsl(0, 0%, 80%);
+        border: 1px solid hsl(0, 0%, 80%);
         border-radius: 6px;
 
     }
@@ -343,12 +308,14 @@ border: 1px solid hsl(0, 0%, 80%);
  }
  .orderBtn:hover {
      border: 1px solid black;
+     color: #000;
  }
  .orderBtn {
     border: 1px solid black;
     background-color: white;
     width: 50rem;
     margin-top: 3rem;
+    color: #000;
 
 }
 .Toastify__toast-body>div:last-child {
@@ -370,6 +337,11 @@ input.form-control.open.inputs {
     border-radius: 5px;
     line-height: 25px;
     height: 35px;
+}
+.react-tel-input .form-control {
+
+    width: 370px;
+
 }
 }
 

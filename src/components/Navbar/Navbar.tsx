@@ -1,17 +1,16 @@
 import React, { useState, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
-import Search from "../Search/Search";
 import { ShopContext } from "../../context/ShopContext";
 import Vector1 from "../../assets/Vector1.png";
 import Vector2 from "../../assets/Vector2.png";
 import Vector3 from "../../assets/Vector3.png";
 import Vector4 from "../../assets/Vector4.png";
 import "./navbar.scss";
+import Search from "../Search/Search";
 
 const MenuIcon = styled.div`
   display: none;
-
   @media (max-width: 768px) {
     display: block;
     cursor: pointer;
@@ -47,7 +46,7 @@ const Navbar: React.FC = () => {
     throw new Error("Navbar must be used within a ShopContextProvider");
   }
 
-  const { cartItems, productData, setSearchResults} = context;
+  const { cartItems } = context;
 
   const handleSearchIconClick = () => {
     setIsSearchClicked(!isSearchClicked);
@@ -57,16 +56,18 @@ const Navbar: React.FC = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const cartProducts =
-    productData?.filter((product) => cartItems[product.id] > 0) || [];
-
-
-  const handleSearch = (query: string) => {
-    fetch(`https://dummyjson.com/products/search?q=${query}`)
-      .then((response) => response.json())
-      .then((data) => setSearchResults(data.products))
-      .catch((error) => console.error("Error fetching data:", error));
+  const closeMenu = () => {
+    setIsMenuOpen(false);
   };
+
+  const cartQuantity = Object.values(cartItems).reduce(
+    (acc, quantity) => acc + quantity,
+    0
+  );
+
+  function handleSearch(_query: string): void {
+    throw new Error("Function not implemented.");
+  }
 
   return (
     <>
@@ -83,26 +84,28 @@ const Navbar: React.FC = () => {
               </MenuIcon>
               <ul className="navlinks">
                 <li>
-                  <NavLink to="/">Home</NavLink>
+                  <NavLink to="/" onClick={closeMenu}>
+                    Home
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/shop" id="shop">
+                  <NavLink to="/shop" id="shop" onClick={closeMenu}>
                     Shop
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/about" id="about">
+                  <NavLink to="/about" id="about" onClick={closeMenu}>
                     About
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/contact" id="contact">
+                  <NavLink to="/contact" id="contact" onClick={closeMenu}>
                     Contact
                   </NavLink>
                 </li>
               </ul>
               <div className="icons">
-                <NavLink to="/" id="logo1">
+                <NavLink to="/" id="logo1" onClick={closeMenu}>
                   <div className="icon">
                     <img src={Vector1} alt="Logo" />
                   </div>
@@ -115,19 +118,19 @@ const Navbar: React.FC = () => {
                   <img src={Vector2} alt="Search" />
                 </div>
                 {isSearchClicked && <Search onSearch={handleSearch} />}
-                <NavLink to="/" id="logo3">
+                <NavLink to="/" id="logo3" onClick={closeMenu}>
                   <div className="icon">
                     <img src={Vector3} alt="Logo" />
                   </div>
                 </NavLink>
                 <CartIconContainer>
-                  <Link to="/cart" id="logo4">
+                  <Link to="/cart" id="logo4" onClick={closeMenu}>
                     <div className="icon">
                       <img src={Vector4} alt="Cart-icon" />
                     </div>
                   </Link>
-                  {cartProducts && (
-                    <CartCounter>{cartProducts?.length}</CartCounter>
+                  {cartQuantity > 0 && (
+                    <CartCounter>{cartQuantity}</CartCounter>
                   )}
                 </CartIconContainer>
               </div>

@@ -24,11 +24,7 @@ const Carts: React.FC = () => {
 
 const cartProducts =
   productData?.filter((product) => cartItems[product.id] > 0) || [];
-console.log(cartProducts.length);
-
-  // console.log(cartProducts?.length, productData);
-  // console.log(productData)
-
+  console.log(cartProducts.length);
 
 
 //scroll effect to take the page back to top
@@ -67,18 +63,13 @@ console.log(cartProducts.length);
               </div>
               <div className="divPercentage">
                 <div className="quantityControl divPercentage">
+                
                   <button
                     className="cartBtn"
-                    onClick={() => removeFromCart(product.id)}
                   >
-                    -
-                  </button>
-                  <span>{cartItems[product.id]}</span>
-                  <button
-                    className="cartBtn"
-                    onClick={() => addToCart(product.id, 1)}
-                  >
-                    +
+                    <span onClick={() => removeFromCart(product.id)}>-</span>
+                    <span>{cartItems[product.id]}</span>
+                    <span onClick={() => addToCart(product.id, 1)}>+</span>
                   </button>
                 </div>
               </div>
@@ -91,6 +82,7 @@ console.log(cartProducts.length);
                 <img
                   src={deleteicon}
                   alt="delete icon"
+                  className="deleteIcon"
                   onClick={() => context.deleteFromCart(product.id)}
                 />
               </div>

@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
     <>
       <div className="herobg">
         <div className="hero">
-          <img src={meubel} alt="meubel" />
+          <img src={meubel} alt="meubel" className="meubel"/>
           <h1 className="heroHeader">
             {url === "/shop"
               ? "Shop"

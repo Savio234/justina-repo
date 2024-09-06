@@ -128,6 +128,7 @@ $text-underline: underline;
 }
 .selectedColorText{
     font-size: 2rem;
+    font-weight: 800;
 }
 .addItems {
     display: flex;
@@ -148,6 +149,7 @@ $text-underline: underline;
     gap: $gap2;
     background-color: $b-white;
     border: $b-black;
+    color: #000;
 }
 
 .addItemsCount:hover {
@@ -158,6 +160,7 @@ $text-underline: underline;
 .addToCartBtn {
     background-color: $b-white;
     border: $b-black;
+    color: #000;
 }
 
 .addToCartBtn:hover {
@@ -167,7 +170,8 @@ $text-underline: underline;
 
 .outdoorSofa {
     border-radius: $b-radius2;
-    width: $width7;
+    width: 10rem;
+    height: 10rem;
     display: $d-flex;
     flex-direction: $f-column;
     margin-bottom: 20px;
@@ -194,6 +198,10 @@ $text-underline: underline;
     display: $d-flex;
     gap: $gap2;
 
+}
+.socials{
+    width: 3rem;
+    height: 3rem;
 }
 
 .description {
@@ -274,29 +282,99 @@ $text-underline: underline;
 
 
 
-@media (max-width: 1023px) {}
-
-
-
-@media (max-width: 650px) {
- 
-         .singleImage {
-             display: block;
-         }
-
-    .sofaDescription {
-        display: block;
-    }
-
-    .sofaCollections {
-        display: none;
-    }
-
-        .carousel .slide img {
-            width: 100%;
-            
+@media (max-width: 1023px) {
+    .colorsBtn1,
+        .colorsBtn2,
+        .colorsBtn3 {
+            border-radius: 100%;
+            transform: scaleY(1.9);
         }
-        
+        div.menuIcon{
+            display: none;
+        }
+}
+
+
+
+@media (max-width: 720px) {
+ 
+    .singleImage {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    
+    
+        .sofaDescription {
+            display: block;
+        }
+    
+        .sofaCollections {
+            display: none;
+        }
+    
+        .carousel .control-dots .dot {
+            -webkit-transition: opacity .25s ease-in;
+            -moz-transition: opacity .25s ease-in;
+            -ms-transition: opacity .25s ease-in;
+            -o-transition: opacity .25s ease-in;
+            transition: opacity .25s ease-in;
+            opacity: .3;
+            filter: alpha(opacity=30);
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
+            background: #121212;
+            width: 8px;
+            height: 8px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 0 8px;
+            color: black;
+            border-radius: 50%;
+    
+        }
+    
+        .control-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.25rem;
+        }
+    
+        .carousel-status {
+            display: block;
+        }
+    
+        .carousel {
+            display: block;
+        }
+    
+        .productDetails {
+            font-size: 25px;
+        }
+    
+        .star {
+            width: 2rem;
+            height: 2rem;
+        }
+         div.menuIcon {
+            display: block;
+        }
+        button.colorsBtn1,
+        button.colorsBtn2,
+        button.colorsBtn3{
+            padding: 10px;
+        }
+        .colorsBtn1,
+        .colorsBtn2,
+        .colorsBtn3 {
+            border-radius: 100%;
+            transform: scaleY(1.2);
+        }
+        .selectedColorText {
+            font-size: 4rem;
+            font-weight: 800;
+        }
+                 
         
     }
 @media (max-width: 600px) {
@@ -350,6 +428,10 @@ $text-underline: underline;
 .star {
     width: 2rem;
     height: 2rem;
+}
+.socials {
+    width: 7rem;
+    height: 7rem;
 }
 }
 
@@ -452,6 +534,9 @@ $text-underline: underline;
 .star {
     width: 8rem;
     height: 7rem;
+}
+.addItemsCount, .addToCartBtn{
+    color: #000;
 }
 }
 

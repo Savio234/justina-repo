@@ -3,7 +3,7 @@
     gap: 4.4rem;
     justify-content: center;
     align-items: center;
-    height: 30vh;
+    height: fit-content;
     background-color: #FAF4F4;
     padding: 1rem;
 
@@ -107,7 +107,7 @@
     .guarantee {
             display: block;
                 gap: 6rem;
-                height: 180rem;
+                height: fit-content;
                 background-color: #FAF4F4;
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -137,7 +137,7 @@
 .guarantee {
         display: block;
         gap: 6rem;
-        height: 60vh;
+        height: fit-content;
         background-color: #FAF4F4;
         padding-top: 15px;
         padding-bottom: 15px;

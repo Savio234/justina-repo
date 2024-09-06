@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useDispatch} from "react-redux";
+import React, { useEffect, useState, useContext } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { setProducts } from "../../redux/actions/productActions";
 import SearchResults from "../../components/Search/SearchResults";
 import { ShopContext } from "../../context/ShopContext";
+import Filter from "../../components/Filter/Filter";
 
 const Homepage: React.FC = () => {
   const [screenSize, setScreenSize] = useState<number>(window.innerWidth);
@@ -12,6 +13,8 @@ const Homepage: React.FC = () => {
   const [productsPerPage, setProductsPerPage] = useState<number>(16);
   const [displayedProducts, setDisplayedProducts] = useState<any[]>([]);
   const [allProducts, setAllProducts] = useState<any[]>([]);
+  const [sortOption, setSortOption] = useState<string>("default");
+  const [categoryFilter, setCategoryFilter] = useState<string>("");
   const { searchResults }: any = useContext(ShopContext);
   const api = "https://dummyjson.com/products";
 
@@ -36,7 +39,7 @@ const Homepage: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   useEffect(() => {
     fetch(api)
       .then((response) => response.json())
@@ -50,47 +53,67 @@ const Homepage: React.FC = () => {
       });
   }, [productsPerPage, dispatch]);
 
+  useEffect(() => {
+    let filteredProducts = [...allProducts];
+
+    // category filter
+    if (categoryFilter) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.category === categoryFilter
+      );
+    }
+
+    // sorting
+    if (sortOption === "price-asc") {
+      filteredProducts.sort((a, b) => a.price - b.price);
+    } else if (sortOption === "price-desc") {
+      filteredProducts.sort((a, b) => b.price - a.price);
+    }
+
+    setTotalPages(Math.ceil(filteredProducts.length / productsPerPage));
+    setDisplayedProducts(
+      filteredProducts.slice(
+        (activePage - 1) * productsPerPage,
+        activePage * productsPerPage
+      )
+    );
+  }, [sortOption, categoryFilter, productsPerPage, activePage, allProducts]);
+
   const handleNextPage = () => {
     if (activePage < totalPages) {
-      const nextPage = activePage + 1;
-      setActivePage(nextPage);
-      const startIndex = (nextPage - 1) * productsPerPage;
-      const nextPageProducts = allProducts.slice(
-        startIndex,
-        startIndex + productsPerPage
-      );
-      setDisplayedProducts(nextPageProducts);
+      setActivePage(activePage + 1);
     }
   };
 
   const handlePreviousPage = () => {
     if (activePage > 1) {
-      const previousPage = activePage - 1;
-      setActivePage(previousPage);
-      const startIndex = (previousPage - 1) * productsPerPage;
-      const previousPageProducts = allProducts.slice(
-        startIndex,
-        startIndex + productsPerPage
-      );
-      setDisplayedProducts(previousPageProducts);
+      setActivePage(activePage - 1);
     }
   };
 
   const handlePageClick = (pageNumber: number) => {
     setActivePage(pageNumber);
-    const startIndex = (pageNumber - 1) * productsPerPage;
-    const pageProducts = allProducts.slice(
-      startIndex,
-      startIndex + productsPerPage
-    );
-    setDisplayedProducts(pageProducts);
   };
+
+  // filtered products count calculation
+  const filteredProductsCount = allProducts.filter(
+    (product) => !categoryFilter || product.category === categoryFilter
+  ).length;
 
   return (
     <>
       <main>
+        <Filter
+          setSortOption={setSortOption}
+          setCategoryFilter={setCategoryFilter}
+          setProductsPerPage={setProductsPerPage}
+          totalProducts={filteredProductsCount}
+          productsPerPage={productsPerPage}
+          activePage={activePage}
+          filteredProductsCount={filteredProductsCount} 
+        />
         {!searchResults ? (
-          <div className="products" id="allProducts">
+          <div className="products allProducts">
             {displayedProducts.map((product, index) => (
               <div className="productdiv" key={index}>
                 <Link to={`/products/${product.id}`}>

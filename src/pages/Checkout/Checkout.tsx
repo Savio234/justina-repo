@@ -1,14 +1,13 @@
-import React, { useContext, useState, useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../../context/ShopContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "./checkout.scss";
 import Select from "react-select";
-import { InputMask } from '@react-input/mask';
-
-
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import "./checkout.scss";
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required("First Name is required"),
@@ -19,10 +18,10 @@ const validationSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
     .required("Email address is required"),
-  
+  phone: Yup.string()
+    .required("Phone number is required")
+    .matches(/^\d{11,}$/, "Phone number must be at least 11 digits"),
 });
-
-
 
 const Checkout: React.FC = () => {
   const context = useContext(ShopContext);
@@ -51,19 +50,24 @@ const Checkout: React.FC = () => {
     city: "",
     zipCode: "",
     email: "",
+    phone: "",
     additionalInfo: "",
-
   };
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = (values: any) => {
     if (cartProducts.length === 0) {
       toast.error("Your cart is empty");
       return;
     }
 
+    if (values.phone.replace(/\D/g, "").length < 11) {
+      toast.error("Invalid phone number");
+      return;
+    }
+
     notify();
-    setCartItems(getDefaultCart()); 
-    navigate("/"); 
+    setCartItems(getDefaultCart());
+    navigate("/");
   };
 
   const notify = () => toast.success("Order Placed Successfully");
@@ -71,21 +75,20 @@ const Checkout: React.FC = () => {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState<any>({});
 
-   useEffect(() => {
-     fetch(
-       "https://valid.layercode.workers.dev/list/countries?format=select&flags=true&value=code"
-     )
-       .then((response) => response.json())
-       .then((data) => {
-         setCountries(data.countries);
-         setSelectedCountry(data.userSelectValue);
-       });
-   }, []);
+  useEffect(() => {
+    fetch(
+      "https://valid.layercode.workers.dev/list/countries?format=select&flags=true&value=code"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setCountries(data.countries);
+        setSelectedCountry(data.userSelectValue);
+      });
+  }, []);
 
-   useEffect(() => {
-  window.scrollTo(0, 0);
-}, []);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -97,7 +100,7 @@ const Checkout: React.FC = () => {
             validationSchema={validationSchema}
             onSubmit={handlePlaceOrder}
           >
-            {({ isSubmitting }) => (
+            {({ isSubmitting, setFieldValue }) => (
               <>
                 <Form className="billingForm">
                   <div className="billingFormFlex">
@@ -178,13 +181,17 @@ const Checkout: React.FC = () => {
                   <label htmlFor="phone" className="labels">
                     Phone
                   </label>
-                  <InputMask
-                    mask="+234 (___) ___-__-__"
-                    replacement={{ _: /\d/ }}
-                    className="inputs"
-                    type="tel"
+                  <PhoneInput
+                    country={"ng"}
+                    value={initialValues.phone}
+                    onChange={(phone) => setFieldValue("phone", phone)}
+                    inputClass="inputs"
                   />
-                  
+                  <ErrorMessage
+                    name="phone"
+                    component="div"
+                    className="error"
+                  />
                   <label htmlFor="email" className="labels">
                     Email address
                   </label>
@@ -271,7 +278,7 @@ const Checkout: React.FC = () => {
                       />
 
                       <label htmlFor="cashOnDelivery" className="transferText">
-                        Cash On Delivery
+                        Cash on Delivery
                       </label>
 
                       <p className="checkoutText">

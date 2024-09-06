@@ -57,7 +57,7 @@ const { productId } = useParams<{ productId: string }>();
   const handleAddToCart = () => {
     if (context) {
       context.addToCart(productData.id, quantity);
-      setQuantity(1); // Reset quantity after adding
+      setQuantity(1); 
     } else {
       console.error("ShopContext is not available");
     }
@@ -186,13 +186,13 @@ const { productId } = useParams<{ productId: string }>();
             <p className="socialIcons">
               Share :
               <span>
-                <img src={facebook} alt="Facebook" />
+                <img src={facebook} alt="Facebook" className="socials" />
               </span>
               <span>
-                <img src={linkedin} alt="LinkedIn" />
+                <img src={linkedin} alt="LinkedIn" className="socials" />
               </span>
               <span>
-                <img src={twitter} alt="Twitter" />
+                <img src={twitter} alt="Twitter" className="socials" />
               </span>
             </p>
           </div>
